@@ -9,14 +9,6 @@ ui-skills/
 ├── styles/                    # The core product — 20 style definition files
 │   ├── _index.md              # Catalog with mood/industry tags and recommendation matrix
 │   └── {style-name}.md        # Individual style guardrails
-├── showcase/                  # Next.js showcase site (tools.heiberg.co/ui-skills)
-│   └── src/
-│       ├── app/               # App router (single page + layout)
-│       ├── components/
-│       │   ├── style-picker.tsx
-│       │   └── styles/        # 20 style implementations (one per style)
-│       └── data/
-│           └── styles.ts      # Style metadata and dynamic imports
 ├── SKILL.md                   # Agent Skills standard — skill definition (root)
 ├── AGENTS.md                  # Codex fallback instructions
 ├── STYLE-TEMPLATE.md          # Blank template for new styles
@@ -25,7 +17,7 @@ ui-skills/
 ├── .windsurf/rules/           # Windsurf adapter
 ├── CLAUDE.md                  # This file
 ├── README.md                  # Public-facing documentation
-└── LICENSE                    # MIT
+└── LICENSE                    # PolyForm Noncommercial 1.0
 ```
 
 ## Key Files
@@ -48,22 +40,6 @@ ui-skills/
 - The Non-Negotiables section is critical — it defines the 3 things that MUST be present for the style to be recognizable
 - Update `styles/_index.md` whenever a style is added or removed
 - Keep descriptions as guardrails (families, characteristics, ranges) not specifications (exact hex codes only)
-
-## Showcase Site
-
-- **Tech**: Next.js (App Router) + Tailwind CSS v4 + TypeScript
-- **Font loading**: `next/font/google` with CSS variables, mapped to Tailwind tokens via `@theme inline`
-- **Pattern**: Each style is a self-contained component in `showcase/src/components/styles/` that renders the full page
-- **Deployment**: Vercel at `tools.heiberg.co/ui-skills` with `basePath: '/ui-skills'`
-- **Analytics**: Umami Cloud (privacy-focused, no cookies)
-
-### Adding a New Style Implementation
-
-1. Create `showcase/src/components/styles/{name}.tsx`
-2. Export a default component that renders all page sections (Navbar, Hero, Features, StyleGallery, Install, Footer)
-3. Style everything according to the corresponding `styles/{name}.md` guardrails
-4. Add the style to `showcase/src/data/styles.ts`
-5. Add any required fonts to `showcase/src/app/layout.tsx`
 
 ## Multi-Tool Distribution
 

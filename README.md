@@ -2,7 +2,7 @@
 
 **Design direction for AI-generated UI.** 20 style guardrail files that give LLMs the context to build tasteful, consistent interfaces.
 
-[Live Showcase](https://tools.heiberg.co/ui-skills) | [MIT License](LICENSE)
+[Live Showcase](https://tools.heiberg.co/ui-skills) | [PolyForm Noncommercial](LICENSE)
 
 ## What This Is
 
@@ -43,13 +43,13 @@ One-liner — clone into your tool's skill directory:
 
 ```bash
 # Claude Code
-git clone https://github.com/Heiberg-Industries/ui-skills.git .claude/skills/ui-skills
+git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git .claude/skills/ui-skills
 
 # OpenAI Codex CLI
-git clone https://github.com/Heiberg-Industries/ui-skills.git .agents/skills/ui-skills
+git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git .agents/skills/ui-skills
 
 # GitHub Copilot (VS Code)
-git clone https://github.com/Heiberg-Industries/ui-skills.git .github/skills/ui-skills
+git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git .github/skills/ui-skills
 ```
 
 Then just ask for UI:
@@ -62,7 +62,7 @@ Then just ask for UI:
 ### Cursor
 
 ```bash
-git clone https://github.com/Heiberg-Industries/ui-skills.git /tmp/ui-skills
+git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git /tmp/ui-skills
 cp -r /tmp/ui-skills/.cursor/rules/ .cursor/rules/
 cp -r /tmp/ui-skills/styles/ styles/
 rm -rf /tmp/ui-skills
@@ -71,7 +71,7 @@ rm -rf /tmp/ui-skills
 ### Windsurf
 
 ```bash
-git clone https://github.com/Heiberg-Industries/ui-skills.git /tmp/ui-skills
+git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git /tmp/ui-skills
 cp -r /tmp/ui-skills/.windsurf/rules/ .windsurf/rules/
 cp -r /tmp/ui-skills/styles/ styles/
 rm -rf /tmp/ui-skills
@@ -118,4 +118,4 @@ Want to add a style? Use [STYLE-TEMPLATE.md](STYLE-TEMPLATE.md) as your starting
 
 ## License
 
-MIT - see [LICENSE](LICENSE)
+PolyForm Noncommercial 1.0 — free for non-commercial use. See [LICENSE](LICENSE) for details.
