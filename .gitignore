@@ -1,8 +1,10 @@
 .DS_Store
-.claude/settings.local.json
-CLAUDE.local.md
 node_modules/
-
-# Session context (temporary, deleted when task is done)
-docs/SESSION_CONTEXT.md
 MEMORY.md
+
+# Internal dev files (keep local, not on GitHub)
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+STYLE-TEMPLATE.md
+docs/
