@@ -230,6 +230,7 @@ function showHelp() {
   console.log('');
   console.log('  ' + c.bold + 'Usage:' + c.reset);
   console.log('    npx designbrief [options]');
+  console.log('    npx designbrief generate <style> [--format <fmt>] [--out-dir <dir>]');
   console.log('');
   console.log('  ' + c.bold + 'Options:' + c.reset);
   console.log('    --tool, -t <tools>   Target tool(s): claude, cursor, windsurf, copilot, codex');
@@ -238,11 +239,18 @@ function showHelp() {
   console.log('    --help, -h           Show this help message');
   console.log('    --version, -v        Show version');
   console.log('');
+  console.log('  ' + c.bold + 'Generate:' + c.reset);
+  console.log('    generate <style>       Export design tokens as files');
+  console.log('    --format, -f <fmt>     dtcg, css, tailwind, or all (default: all)');
+  console.log('    --out-dir, -o <dir>    Output directory (default: current directory)');
+  console.log('');
   console.log('  ' + c.bold + 'Examples:' + c.reset);
-  console.log('    npx designbrief                    Auto-detect your tool and install');
-  console.log('    npx designbrief --tool claude      Install for Claude Code');
-  console.log('    npx designbrief --tool cursor      Install for Cursor');
-  console.log('    npx designbrief --list             Show all 21 available styles');
+  console.log('    npx designbrief                              Auto-detect and install');
+  console.log('    npx designbrief --tool claude                Install for Claude Code');
+  console.log('    npx designbrief --list                       Show all 21 styles');
+  console.log('    npx designbrief generate glassmorphism       Export all token formats');
+  console.log('    npx designbrief generate bauhaus -f css      Export CSS only');
+  console.log('    npx designbrief generate japandi -o ./tokens Write to ./tokens/');
   console.log('');
   console.log('  ' + c.dim + 'Docs: https://github.com/Heiberg-Industries/designbrief' + c.reset);
   console.log('');
@@ -272,6 +280,34 @@ function showStyles() {
 function parseArgs() {
   var args = process.argv.slice(2);
   var flags = {};
+
+  // Subcommand: generate
+  if (args[0] === 'generate') {
+    flags.command = 'generate';
+    for (var j = 1; j < args.length; j++) {
+      switch (args[j]) {
+        case '--format':
+        case '-f':
+          flags.format = args[++j];
+          break;
+        case '--out-dir':
+        case '-o':
+          flags.outDir = args[++j];
+          break;
+        case '--help':
+        case '-h':
+          flags.help = true;
+          break;
+        default:
+          if (args[j].startsWith('-')) {
+            console.error(c.red + 'Unknown option: ' + args[j] + c.reset);
+            process.exit(1);
+          }
+          flags.style = args[j];
+      }
+    }
+    return flags;
+  }
 
   for (var i = 0; i < args.length; i++) {
     switch (args[i]) {
@@ -314,6 +350,58 @@ async function main() {
   if (flags.help) return showHelp();
   if (flags.version) return showVersion();
   if (flags.list) return showStyles();
+
+  if (flags.command === 'generate') {
+    if (!flags.style) {
+      console.error(c.red + 'Error: style name required.' + c.reset);
+      console.error('Usage: npx designbrief generate <style> [--format dtcg|css|tailwind|all]');
+      process.exit(1);
+    }
+    var validFormats = ['dtcg', 'css', 'tailwind', 'all'];
+    var fmt = flags.format || 'all';
+    if (validFormats.indexOf(fmt) === -1) {
+      console.error(c.red + 'Unknown format: ' + fmt + c.reset);
+      console.error('Valid formats: ' + validFormats.join(', '));
+      process.exit(1);
+    }
+    var outDir = flags.outDir || process.cwd();
+
+    printHeader();
+    console.log('  Generating tokens for ' + c.bold + flags.style + c.reset + '...');
+    console.log('');
+
+    try {
+      var gen = await import('../lib/generate.mjs');
+      var result = await gen.handleGenerate({ style: flags.style, format: fmt, outDir: outDir });
+
+      if (result.freeform) {
+        console.log('  ' + c.yellow + 'Freeform is intentionally unopinionated \u2014 no tokens to export.' + c.reset);
+        console.log('  Define your own tokens based on the project context.');
+        console.log('');
+        return;
+      }
+
+      for (var k = 0; k < result.files.length; k++) {
+        console.log('    ' + c.green + '\u2713' + c.reset + ' ' + result.files[k].file + c.dim + '  (' + result.files[k].label + ')' + c.reset);
+      }
+      console.log('');
+      console.log('  ' + c.green + result.files.length + ' file' + (result.files.length === 1 ? '' : 's') + ' written to ' + c.reset + outDir);
+      console.log('');
+    } catch (err) {
+      if (err.name === 'StyleNotFoundError') {
+        console.error('  ' + c.red + err.message + c.reset);
+        process.exit(1);
+      }
+      throw err;
+    }
+
+    // Fire-and-forget telemetry
+    import('../lib/telemetry.mjs')
+      .then(function (m) { m.trackEvent('cli-generate', { style: flags.style, format: fmt }); })
+      .catch(function () {});
+
+    return;
+  }
 
   printHeader();
 

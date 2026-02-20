@@ -62,11 +62,11 @@ server.tool(
 
 server.tool(
   'get-tokens',
-  'Export all design tokens from a designbrief style as structured JSON. Includes colors, fonts, border-radius, shadows, and transitions.',
+  'Export design tokens from a designbrief style. Supports nested JSON, flat CSS vars, W3C DTCG format, or CSS custom properties.',
   {
     style: z.string().describe('Style name, e.g. "bauhaus", "dark-mode-premium"'),
-    format: z.enum(['flat', 'nested']).optional().default('nested')
-      .describe('"flat" returns CSS custom property pairs, "nested" groups by category'),
+    format: z.enum(['flat', 'nested', 'dtcg', 'css']).optional().default('nested')
+      .describe('"flat" = CSS var pairs, "nested" = grouped JSON, "dtcg" = W3C Design Tokens, "css" = CSS file with :root vars'),
   },
   withTelemetry('get-tokens', handleGetTokens)
 );
