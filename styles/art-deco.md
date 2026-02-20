@@ -161,6 +161,169 @@ Animation in Art Deco is **revealing and theatrical**. Elements appear with cere
 - **Scroll**: Sections reveal as you scroll. Decorative elements animate in when they enter the viewport.
 - **Avoid**: Anything bouncy, playful, or casual. Movement should feel orchestrated.
 
+## Dark Mode & Light Mode
+
+Art Deco is **dark-first** by nature — the style's identity depends on deep, rich backgrounds (black, navy, deep emerald) that let gold metallic accents shine. Dark mode IS the default.
+
+### Dark Mode (Default)
+The canonical Art Deco palette:
+- Page background: Deep black (#0D0D0D) or navy (#0A1628)
+- Card surfaces: One step lighter (#1A1A1A, #1A1A2E)
+- Text: Warm cream (#F5F0E8) for body, gold gradient for headings
+- Borders: Gold (#C9A84C) at 100% or reduced to 60% opacity for secondary lines
+- Shadows: Minimal — near-invisible. Art Deco relies on borders and decoration, not shadow depth.
+
+### Light Mode (Inverted Deco)
+A less common but valid variant — think Art Deco in daylight (Miami's South Beach):
+- Page background: Warm cream (#F5F0E8) or champagne (#F5E6CC)
+- Card surfaces: White (#FFFFFF) with gold borders
+- Text: Deep black (#0D0D0D) for body, gold or dark jewel tones for headings
+- Gold accents remain gold — they work on both dark and light
+- Jewel tone accents (emerald, ruby) may need darkening for contrast on light backgrounds
+- Decorative geometric patterns: Gold on cream instead of gold on black
+- The light variant feels more "daytime glamour" — afternoon tea at The Ritz vs. evening at a speakeasy
+
+### CSS Custom Properties
+```css
+:root {
+  --deco-bg: #0D0D0D;
+  --deco-surface: #1A1A1A;
+  --deco-gold: #C9A84C;
+  --deco-gold-light: #F4E4B0;
+  --deco-text: #F5F0E8;
+  --deco-text-secondary: rgba(245, 240, 232, 0.6);
+}
+.light-deco {
+  --deco-bg: #F5F0E8;
+  --deco-surface: #FFFFFF;
+  --deco-text: #0D0D0D;
+  --deco-text-secondary: rgba(13, 13, 13, 0.6);
+}
+```
+
+## Responsive & Mobile
+
+Art Deco's centered, symmetrical layout adapts naturally to mobile — it's already single-column-friendly.
+
+### Typography Scaling
+- Hero headings: Desktop 64-80px → Tablet 48-56px → Mobile 36-44px
+- Body: Stays at 16-18px across breakpoints
+- Letter-spacing on ALL CAPS headings: Desktop +0.15em → Mobile +0.1em (tighter to save space)
+
+### Spacing Adaptation
+- Section padding: Desktop 100-120px → Tablet 60-80px → Mobile 40-60px
+- Card padding: Desktop 48px → Mobile 24-32px
+- Decorative dividers: Scale proportionally, maintain gold line weight at 1px minimum
+
+### Layout Behavior
+- Centered single-column works perfectly on mobile — Art Deco's symmetry is naturally responsive
+- Two-column card layouts stack to single column below 768px
+- Decorative corner ornaments on cards: Simplify or remove on mobile (they become too small to appreciate)
+- Fan/sunburst dividers: Reduce height on mobile (80px → 40px) but keep visible
+
+### Touch Targets
+- Gold-bordered buttons: Ensure 44px minimum height. ALL CAPS small text buttons need generous padding.
+- Navigation links with wide letter-spacing: Increase tap area with padding
+
+### Performance
+- Gold gradient text uses background-clip — well-supported, minimal performance impact
+- Decorative CSS patterns (conic-gradient fans, stepped borders): Lightweight, no performance concern
+- SVG geometric ornaments: Inline for small decorations, consider lazy-loading large decorative backgrounds
+
+## Content & Voice
+
+Art Deco copy is **formal, dramatic, and celebratory** — the voice of a luxury brand, a grand invitation, or a master of ceremonies.
+
+### Headline Tone
+Theatrical and commanding. Headlines announce with gravitas:
+- "An Evening of Distinction"
+- "Timeless Craftsmanship"
+- "The Art of Excellence"
+- "Where Elegance Meets Innovation"
+Short, declarative phrases. ALL CAPS reinforces the monumental feel.
+
+### Body Copy
+Formal but not stiff. Evocative, sensory language that paints a picture of luxury:
+- Rich adjectives: "exquisite," "resplendent," "impeccable," "bespoke"
+- References to craft, heritage, and timelessness
+- Moderate length — enough to convey quality, not so much that it overwhelms the visual design
+- Avoid casual language, contractions, or tech jargon
+
+### CTAs
+Commanding and invitational — like receiving an exclusive invitation:
+- "Reserve Your Place"
+- "Begin the Experience"
+- "Discover the Collection"
+- "Request an Invitation"
+- Avoid casual CTAs like "Get started" or "Sign up" — too informal for Art Deco
+
+### Microcopy
+Maintain the formality even in small text:
+- Error: "We were unable to process your request. Please try again."
+- Empty state: "Nothing here yet — your collection awaits."
+- Loading: "Preparing your experience..."
+
+### Content Density
+LOW to MODERATE — Art Deco is about presence, not information density. Generous whitespace around every text block. Each section makes one powerful statement.
+
+## Icons & Illustrations
+
+### Icon Style
+Geometric and linear — matching Art Deco's angular, decorative vocabulary:
+- Thin line icons (1.5px stroke) in gold or cream
+- Geometric construction: circles, triangles, chevrons, not organic curves
+- Icons can be framed in small geometric borders (diamond, octagon)
+- Custom decorative icons preferred: fan shapes, chevrons, stylized stars
+
+### Recommended Sets
+- Phosphor Icons (thin weight) — geometric enough for Deco
+- Custom SVG icons built from geometric shapes are most authentic
+- Avoid: rounded/organic icon sets (Heroicons rounded, Feather's organic feel)
+
+### Illustrations & Photography
+- Photography: High-contrast, dramatic lighting. Subjects: architecture, luxury objects, formal settings
+- Color treatment: Desaturated with gold/warm highlights, or high-contrast black & gold
+- Illustrations: Geometric line art in gold — architectural blueprints, geometric portraits, stylized cityscapes
+- Decorative elements > illustrations — Art Deco uses geometric patterns rather than figurative illustration
+
+### Decorative Elements (Primary Visual Language)
+Art Deco's "illustration" IS its geometric ornamentation:
+- Fan/sunburst shapes (CSS conic-gradient or SVG)
+- Chevron and zigzag patterns (repeating CSS backgrounds)
+- Stepped/terraced border designs
+- Geometric framing elements at section boundaries
+- Corner ornaments on cards and panels
+
+## Accessibility
+
+### Contrast
+- Gold text (#C9A84C) on black (#0D0D0D): ~7.5:1 contrast ratio — PASSES AA and AAA
+- Cream text (#F5F0E8) on black (#0D0D0D): ~16:1 — excellent
+- Secondary text (rgba cream at 60%): Check carefully — may need brightening to meet 4.5:1
+- Gold gradient text: The darkest point of the gradient determines contrast — ensure the darkest gold (#C9A84C) still meets ratio requirements
+- Light mode: Gold on cream is LOW contrast (~2.5:1) — use solid dark gold (#8B7225) for text in light mode
+
+### Focus States
+Gold-outlined focus ring matching the decorative language:
+```css
+:focus-visible {
+  outline: 2px solid #C9A84C;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 6px rgba(201, 168, 76, 0.2);
+}
+```
+The gold ring harmonizes with the style's border language.
+
+### Motion
+- `prefers-reduced-motion`: Disable gold shimmer effects, entrance animations, and decorative element reveals
+- Keep: Static gold gradients, border styling, layout structure — Art Deco is fundamentally a STATIC style, so reduced motion loses very little
+
+### Known Risks
+- ALL CAPS headings with wide letter-spacing: Screen readers handle ALL CAPS correctly, but letter-spacing can cause some screen readers to spell out words. Use `aria-label` with normal casing if needed.
+- Decorative geometric elements (fans, chevrons, corner ornaments): Mark as `aria-hidden="true"` — these are purely decorative
+- Gold gradient text using background-clip: Ensure fallback color is set for browsers that don't support it
+- Small ALL CAPS button text with wide tracking: Harder to read for users with dyslexia — ensure font size is at least 14px
+
 ## Do's and Don'ts
 
 ### Do
@@ -173,13 +336,13 @@ Animation in Art Deco is **revealing and theatrical**. Elements appear with cere
 - Let the style feel LUXURIOUS — generous spacing, rich colors, metallic accents
 
 ### Don't
-- Use rounded corners (sharp angles are Art Deco's language)
-- Skip the gold — it's the single most recognizable Art Deco color element
+- Use rounded corners — because sharp, angular geometry IS Art Deco's visual language; rounding softens and modernizes the feel, losing the 1920s character
+- Skip the gold — it's the single most recognizable Art Deco color signal; without it, the design reads as "elegant dark theme" not Art Deco
 - Use asymmetric or casual layouts
 - Choose friendly, rounded fonts (the typography should feel geometric and tall)
-- Use pastel or muted colors (Art Deco is HIGH contrast — deep darks and bright metallics)
+- Use pastel or muted colors — Art Deco is HIGH contrast by nature; deep darks and bright metallics create the dramatic, luxurious tension that defines the era
 - Over-modernize — some ornamental excess is appropriate and expected
-- Use gradient backgrounds or glassmorphism effects — Art Deco is opaque and solid
+- Use gradient backgrounds or glassmorphism effects — Art Deco is opaque and solid; translucent, blurred surfaces break the era's commitment to bold, defined surfaces and structural clarity
 
 ## Implementation Hints (Tailwind + CSS)
 

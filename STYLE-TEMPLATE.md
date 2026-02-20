@@ -108,6 +108,97 @@
 - **Micro-interactions**: Small feedback animations
 - **Avoid**: Animation types that contradict the style
 
+## Dark Mode & Light Mode
+
+### Mode Preference
+[Is this style light-first, dark-first, or equally suited to both? Why?]
+
+### Palette Adaptation
+- **Background**: How the background changes (specific values, not "just invert")
+- **Surfaces/cards**: How card and container colors adapt
+- **Text**: Primary and secondary text colors in the alternate mode
+- **Accents**: Whether accent colors shift or remain constant
+- **Borders & shadows**: How these change (shadows are less visible in dark mode, borders become more important for definition)
+
+### Implementation
+```css
+/* Dark/light mode CSS custom properties or Tailwind dark: classes */
+```
+
+### Guidance
+[Which mode is recommended as primary? Any caveats or trade-offs when using the alternate mode?]
+
+## Responsive & Mobile
+
+### Breakpoint Strategy
+[How should layouts adapt across breakpoints? What is the mobile-first vs. desktop-first approach for this style?]
+
+### Typography Scaling
+- **Headings**: How heading sizes compress on mobile (specific mobile sizes)
+- **Body**: Whether body text size changes
+- **Hierarchy**: Does the dramatic hierarchy compress or maintain proportions?
+
+### Spacing Adaptation
+- **Section padding**: Desktop → Tablet → Mobile ranges
+- **Element spacing**: How gaps between elements compress
+- **Container padding**: Card and container padding at mobile
+
+### Layout Collapse
+- **Grid strategy**: How multi-column grids collapse (e.g., 3-col → 2-col → 1-col)
+- **Component stacking**: Order of stacked elements on mobile
+- **Navigation**: Mobile navigation pattern (hamburger, bottom sheet, tab bar, etc.)
+
+### Touch & Performance
+- **Touch targets**: Minimum 44px for all interactive elements
+- **Performance**: Any style-specific concerns (e.g., heavy blur effects, complex gradients) and how to simplify for mobile devices
+
+## Content & Voice
+
+### Headline Tone
+[What kind of headlines suit this style? Punchy? Elegant? Minimal? Authoritative? Provide 2-3 example headlines.]
+
+### Body Copy
+[Writing style for body text — casual or formal? Long-form or concise? What reading level? What personality?]
+
+### CTAs & Microcopy
+- **Button labels**: Action-oriented or invitational? Examples of good CTA text for this style.
+- **Error messages**: Tone and personality (friendly? matter-of-fact? playful?)
+- **Empty states**: How to handle empty states in this style's voice
+- **Tooltips & helpers**: Tone for instructional microcopy
+
+### Content Density
+[How much text is appropriate per section? What is the text-to-visual ratio? Does this style favor fewer words with more whitespace, or denser informational layouts?]
+
+## Icons & Illustrations
+
+### Icon Style
+[Line, filled, duotone, 3D, hand-drawn? What weight? What size relationship to the style's border weights and typography?]
+
+### Illustration Approach
+[If applicable — flat, 3D, isometric, hand-drawn, photographic? What mood should illustrations convey?]
+
+### Photography Direction
+[If applicable — what kind of photography suits this style? Mood, color treatment, subject matter, cropping style.]
+
+### Recommended Sources
+[Specific icon sets, illustration packs, or photography styles that complement the style. e.g., Phosphor Icons, Lucide, Heroicons, unDraw, etc.]
+
+## Accessibility
+
+### Contrast & Readability
+- **Known risks**: Specific accessibility challenges inherent to this style (e.g., low contrast in neumorphism, variable backgrounds in glassmorphism)
+- **Minimum contrast**: Verified contrast ratios for the style's typical palette (WCAG AA: 4.5:1 body text, 3:1 large text/UI elements)
+- **Remediation**: How to fix contrast issues without breaking the style's aesthetic
+
+### Focus States
+[How should focus indicators look in this style? Style-specific focus rings/outlines that match the aesthetic while remaining clearly visible. Provide CSS/Tailwind examples.]
+
+### Motion Sensitivity
+[`prefers-reduced-motion` fallbacks — what to disable or simplify for users who are sensitive to motion. Which of the style's animations are essential vs. decorative?]
+
+### Screen Reader Considerations
+[Are there decorative elements that need `aria-hidden`? Background shapes, ornamental borders, or visual-only indicators that need text alternatives?]
+
 ## Do's and Don'ts
 
 ### Do

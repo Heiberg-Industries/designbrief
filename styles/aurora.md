@@ -180,6 +180,188 @@ Animation in Aurora style is **fluid and flowing** — gradients themselves can 
 - **Transitions**: 300-400ms, ease-out. Smooth and modern.
 - **Avoid**: Jerky movements, fast animations. Everything should flow.
 
+## Dark Mode & Light Mode
+
+Aurora/Gradient works **equally well in both modes** — the gradient is the hero, and it works on both dark and light bases.
+
+### Dark Mode (Dramatic Aurora)
+The most impactful variant — vivid gradients on dark backgrounds:
+- Page background: Near-black (#0F0F1A, #111119)
+- Gradient blobs: Full vivid saturation at 30-40% opacity with heavy blur
+- Cards on gradient: White at 8-12% opacity with backdrop-blur (glassmorphic), OR solid dark (#1A1A2E)
+- Text on gradients: White (#FFFFFF), weight 600+ for readability
+- Text on cards: Light cream (#FAFAFA)
+- Borders: White at 15-20% opacity
+- The dark base lets gradient colors POP — this is the most "aurora borealis" feeling
+
+### Light Mode (Soft Aurora)
+Lighter, softer — gradients feel like watercolor rather than neon:
+- Page background: White (#FFFFFF) or near-white (#FAFAFA)
+- Gradient blobs: Same hues but at 15-25% opacity with heavy blur — pastel and soft
+- Cards on gradient: White (#FFFFFF) with soft shadow
+- Text on gradients: If gradient is on background, use dark text (#1A1A1A) — ensure gradient opacity is LOW enough for contrast
+- Text on cards: Standard dark (#1A1A1A)
+- The light variant feels more "sunrise" — soft, warm, gentle
+- Gradient-filled text headings still work beautifully in light mode
+
+### CSS Custom Properties
+```css
+:root {
+  /* Light mode */
+  --aurora-bg: #FFFFFF;
+  --aurora-surface: #FFFFFF;
+  --aurora-text: #1A1A1A;
+  --aurora-text-secondary: #6B7280;
+  --aurora-blob-opacity: 0.2;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --aurora-bg: #0F0F1A;
+    --aurora-surface: rgba(255, 255, 255, 0.08);
+    --aurora-text: #FFFFFF;
+    --aurora-text-secondary: rgba(255, 255, 255, 0.6);
+    --aurora-blob-opacity: 0.35;
+  }
+}
+```
+
+## Responsive & Mobile
+
+### Typography Scaling
+- Hero headings: Desktop 56-72px → Tablet 40-52px → Mobile 32-40px
+- Gradient text headings: Scale proportionally — they're more impactful at larger sizes
+- Body: 16px across breakpoints
+
+### Spacing Adaptation
+- Hero sections: Desktop 100vh → Mobile 70vh or auto with generous padding
+- Section padding: Desktop 100-120px → Tablet 60-80px → Mobile 40-60px
+- Card padding: Desktop 32px → Mobile 20-24px
+- Card grids: 3-col → 2-col → 1-col
+
+### Layout Behavior
+- Gradient blobs: Reduce SIZE on mobile (500px → 300px), reduce blur slightly
+- Full-bleed gradient sections: Work perfectly on mobile — no adjustment needed
+- Cards on gradient: Stack naturally in single column
+- Gradient text: Still effective on mobile at smaller sizes if weight is bold enough
+
+### Performance (Critical for Aurora)
+- **Gradient blobs with blur(120px)**: The #1 performance concern. On mobile:
+  - Reduce `blur` value (120px → 60px)
+  - Reduce number of blobs (4 → 2)
+  - Consider using a pre-rendered gradient image instead of live blur on low-end devices
+  - Use `will-change: transform` on blob elements
+- **Animated gradients** (background-position shifting): Generally safe at 10s+ cycles
+- **backdrop-filter** on cards over gradients: Same mobile concerns as glassmorphism — test on target devices
+- **Multiple radial-gradient layers**: Compositing many gradients is GPU-intensive — simplify on mobile
+
+## Content & Voice
+
+### Headline Tone
+Creative, dynamic, and contemporary. Headlines feel fresh and forward-looking:
+- "Where Ideas Come Alive"
+- "Create Without Limits"
+- "The Future of Sound"
+- "Designed to Inspire"
+Confident but not corporate. Energetic but not loud. Modern and clean.
+
+### Body Copy
+Clear, modern, and concise — the gradients provide the visual energy, so copy can be straightforward:
+- Short paragraphs (2-3 sentences)
+- Active voice, present tense
+- Contemporary vocabulary — not flowery, not technical
+- Focus on creation, possibility, and expression
+
+### CTAs
+Action-oriented and energetic:
+- "Get Started", "Create Now", "Try Free", "Explore"
+- Short, punchy, confident
+- On gradient buttons, the text is simple — the button itself is already visually dramatic
+
+### Microcopy
+Clean and minimal — matching the modern UI layer:
+- Error: "Something went wrong. Try again."
+- Empty state: "Nothing here yet. Start creating."
+- Loading: "Loading..." (minimal — no personality gimmicks)
+
+### Content Density
+LOW to MODERATE — gradients need space to breathe. The visual spectacle of the gradient IS content. Don't cover beautiful gradient backgrounds with walls of text.
+
+## Icons & Illustrations
+
+### Icon Style
+Clean, modern line icons — matching the crisp UI layer:
+- Standard line icons at 1.5-2px stroke weight
+- Monochrome (white on dark gradient backgrounds, dark on light)
+- Can use gradient fill on FEATURED icons (but not all — reserve for hero or key feature icons)
+- Rounded line caps for a softer feel
+
+### Recommended Sets
+- Lucide — clean, consistent, modern
+- Phosphor (regular weight) — versatile and contemporary
+- Heroicons (outline) — works well against gradient backgrounds
+- Avoid: Heavy filled icons, decorative/ornate icons — they compete with the gradients
+
+### Illustrations
+- Abstract gradient shapes ARE the illustrations — flowing forms, color blobs, light streaks
+- Photography: If used, with gradient color overlays or duotone treatment
+- No figurative illustration needed — the gradient palette creates its own visual narrative
+- 3D abstract renders with gradient coloring (spheres, waves, abstract geometry) can complement
+
+### Gradient Elements as Art
+The gradient blobs, mesh backgrounds, and color transitions serve as the style's primary visual art:
+- Each section can have its own blob/gradient composition
+- Gradient "shapes" (circles, waves) can act as decorative illustrations
+- Animated gradients provide visual interest that static illustrations would
+
+## Accessibility
+
+### Contrast
+- **White text on vivid gradients**: Check against the DARKEST point of the gradient — this is where contrast is lowest
+- **Dark mode gradient backgrounds**: The blobs are translucent over a dark base, so the effective background color varies. Ensure minimum 4.5:1 contrast at any point.
+- **Light mode**: Low-opacity gradient blobs on white can create very subtle backgrounds — text contrast is usually excellent
+- **Gradient text** (background-clip): No contrast ratio tool can measure this easily. Ensure the gradient stays within a luminance range that meets contrast against the background. Fallback: add a solid `color` as the default.
+- Add a semi-transparent overlay between gradient backgrounds and text if contrast is borderline:
+  ```css
+  /* Dark overlay for text readability on vivid gradients */
+  .text-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+  ```
+
+### Focus States
+Matches the modern, rounded UI:
+```css
+:focus-visible {
+  outline: 2px solid var(--aurora-gradient-1, #9B59B6);
+  outline-offset: 3px;
+  border-radius: inherit;
+}
+```
+On gradient backgrounds, use a white focus ring for visibility:
+```css
+.on-gradient :focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
+}
+```
+
+### Motion
+- `prefers-reduced-motion`: Disable gradient position animations, floating blob movements, and entrance animations
+- Keep: Static gradients (they're still vivid and beautiful), gradient text fills, soft shadows
+- Gradient animation is the main atmospheric element — without it, the style is still fully effective as a static design
+
+### Known Risks
+- **Variable contrast on gradient backgrounds**: The biggest accessibility challenge. Text readability changes as the gradient shifts beneath it. Solution: ensure a minimum contrast exists at ALL points of the gradient, or place text on solid/overlay surfaces.
+- **Gradient text legibility**: background-clip text can be hard to read at small sizes or thin weights. Use only on headings at 600+ weight, and provide a fallback solid color.
+- **Performance on mobile**: Heavy blur effects can cause lag, making the interface feel unresponsive — an accessibility concern for users with motor impairments who rely on smooth interactions.
+- **Color-only distinction**: Don't rely on gradient colors alone to convey meaning — the specific hues shift and blend, making them unreliable as semantic indicators.
+
+---
+
 ## Do's and Don'ts
 
 ### Do
@@ -192,10 +374,10 @@ Animation in Aurora style is **fluid and flowing** — gradients themselves can 
 - Explore mesh gradients for the most organic, aurora-like effect
 
 ### Don't
-- Use simple two-color gradients only — Aurora needs complexity
-- Apply gradients to everything — the contrast with clean UI is essential
+- Use simple two-color gradients only — because Aurora's identity comes from the complex, multi-hue transitions that mimic natural light phenomena; a simple blue-to-purple is just a gradient accent, not a design language
+- Apply gradients to everything — because the style's power comes from the CONTRAST between vivid, organic gradients and clean, minimal UI; if everything is gradient, nothing stands out
 - Use muted or desaturated colors — Aurora gradients should be VIVID
-- Let gradients compromise text readability
+- Let gradients compromise text readability — because variable backgrounds create inconsistent contrast that can make text illegible at certain scroll positions
 - Use harsh, abrupt color transitions — gradients should flow smoothly
 - Mix aurora/gradient style with heavy borders, shadows, or textures — keep the UI clean
 - Forget mobile — gradients should be simplified on smaller screens for performance

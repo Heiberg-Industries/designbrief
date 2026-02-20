@@ -167,23 +167,157 @@ Animation in Glassmorphism is **smooth, fluid, and elegant** — like objects mo
 - **Scroll**: Consider subtle parallax between background and glass layers
 - **Avoid**: Harsh/instant transitions, bouncy springs (too playful for this aesthetic), large-scale movements
 
+## Dark Mode & Light Mode
+
+### Mode Preference
+Glassmorphism is **dark-first**. The glass effect is most dramatic and visible against dark, vibrant backgrounds where the frosted distortion creates clear visual separation. Light mode is achievable but the effect is subtler and easier to get wrong.
+
+**Why dark works better:** The frosted blur against bright colors creates a luminous, premium feel — like looking through a real glass panel at neon lights. In light mode, the same blur just looks slightly hazy.
+
+### Dark Mode (Primary)
+- **Background**: Deep, rich gradients with vivid color accents (purple → teal, navy → magenta) or large blurred colorful orbs on a near-black base
+- **Glass surfaces**: `rgba(255, 255, 255, 0.05–0.15)` — barely tinted, mostly transparent
+- **Text**: White (#FFFFFF) primary, `rgba(255,255,255,0.7)` secondary
+- **Borders**: `rgba(255, 255, 255, 0.15–0.25)` — white edges catching light
+- **Accent**: Bright, saturated color from the background gradient family
+
+### Light Mode
+- **Background**: Soft pastel gradients (lavender → peach, sky → mint) or light abstract imagery
+- **Glass surfaces**: `rgba(255, 255, 255, 0.4–0.7)` — more opaque than dark mode to maintain definition
+- **Text**: Near-black (#1A1A2E) primary, gray (#555) secondary
+- **Borders**: `rgba(255, 255, 255, 0.5–0.7)` — brighter border to define edges against light background
+- **Shadows**: Slightly more prominent than dark mode to compensate for reduced contrast
+
+### Implementation
+```css
+/* Dark mode (default) */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-blur: 16px;
+}
+/* Light mode */
+[data-theme="light"] {
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-blur: 12px; /* Slightly less blur — the effect is subtler */
+}
+```
+
+### Guidance
+Start with dark mode. Only use light mode glassmorphism if the product requires it — and if you do, test carefully. The glass effect in light mode can easily look like "foggy cards" rather than "frosted glass." Consider whether glassmorphism is the right choice for a light-first product.
+
+## Responsive & Mobile
+
+### Breakpoint Strategy
+Desktop-first for glassmorphism. The effect is most impressive on large screens where the vivid background has room to breathe and multiple glass panels can float independently.
+
+### Typography Scaling
+- **Headings**: Desktop 36–48px → Tablet 28–36px → Mobile 24–30px. Maintain Semi-bold to Bold weight.
+- **Body**: 16–18px across all breakpoints — readability on glass surfaces is non-negotiable.
+- **Hierarchy**: Compress slightly but keep the moderate hierarchy. Glassmorphism is not shouty.
+
+### Spacing Adaptation
+- **Section padding**: Desktop 80–120px → Tablet 60–80px → Mobile 40–60px
+- **Card padding**: Desktop 24–32px → Mobile 20–24px (never go below 20px — glass needs breathing room)
+- **Panel gaps**: Desktop 16–24px → Mobile 12–16px (keep visible gaps so background shows through)
+
+### Layout Collapse
+- **Grid**: Multi-column floating panels → single column stack on mobile
+- **Navigation**: Sticky glass navbar is effective on mobile — the blur effect as content scrolls beneath it is compelling. Use a glass-panel slide-out or bottom sheet for the menu.
+- **Background**: Simplify to fewer, larger color blobs on mobile. Complex mesh gradients can feel overwhelming on small screens.
+
+### Touch & Performance
+- **Touch targets**: Minimum 44px for all buttons and interactive elements on glass surfaces. The translucent styling can make tap targets visually ambiguous — ensure they're generous.
+- **Performance**: `backdrop-filter: blur()` is GPU-intensive. On low-end mobile devices:
+  - Reduce blur radius (16px → 8px) or use a fallback solid semi-transparent background
+  - Limit the number of simultaneous glass surfaces visible in the viewport
+  - Use `@supports (backdrop-filter: blur(1px))` for progressive enhancement
+  - Simplify or remove background animated blobs on mobile
+
+## Content & Voice
+
+### Headline Tone
+Clean, modern, and quietly confident. Headlines should feel like a premium product announcement — not shouting, but commanding attention through clarity.
+- "Seamless by design"
+- "Built for what's next"
+- "Your data, beautifully organized"
+
+### Body Copy
+Concise, polished, and professional with a slight futuristic edge. Short paragraphs — long text blocks on glass surfaces hurt readability. Aim for 2–3 sentences per block. The tone is that of a thoughtful product designer explaining their work, not a marketer selling.
+
+### CTAs & Microcopy
+- **Button labels**: Clean and action-oriented — "Get Started", "Explore", "Try Free". Avoid aggressive sales language.
+- **Error messages**: Calm and helpful — "Something went wrong. Please try again." No panic, no exclamation marks.
+- **Empty states**: Elegant and inviting — "Nothing here yet. Start by creating your first project."
+- **Tooltips**: Brief and informative. One sentence max.
+
+### Content Density
+Low to moderate. Glass surfaces work best with breathing room — dense text on translucent backgrounds becomes unreadable. Favor visual hierarchy (large heading + short paragraph + CTA) over information density. Text-to-visual ratio: 40% text, 60% visual/space.
+
+## Icons & Illustrations
+
+### Icon Style
+**Outline/line icons** at 1.5–2px stroke weight. The thin, precise lines complement the glass aesthetic without competing with the blur and transparency effects. Filled icons feel too heavy on glass surfaces.
+
+### Illustration Approach
+Abstract, gradient-based illustrations work well — they blend with the vivid background. 3D glass-like objects, translucent shapes, and light refraction effects are on-brand. Avoid flat illustrations — they clash with the depth and layering.
+
+### Photography Direction
+If using photos, apply a slight blur or overlay to integrate them with the glass aesthetic. Photos should be moody, abstract, or atmospheric — not sharp product shots. Consider using photos as the vivid background layer itself (blurred behind the glass).
+
+### Recommended Sources
+- **Icons**: Phosphor Icons (light weight), Lucide, Heroicons (outline), Feather Icons
+- **Illustrations**: Abstract gradient blobs (create custom), 3D glass renders
+- **Colors for icons**: White or accent color at 80–90% opacity on dark glass, dark gray on light glass
+
+## Accessibility
+
+### Contrast & Readability
+- **Known risks**: The variable, translucent background is the #1 accessibility challenge. Text contrast changes depending on what's behind the glass panel — a heading might be readable over a dark blob but disappear over a bright one.
+- **Minimum contrast**: WCAG AA requires 4.5:1 for body text, 3:1 for large text. On glass surfaces, test contrast against the WORST-case background area (the brightest spot behind the glass).
+- **Remediation**: Increase glass surface opacity (from 0.08 to 0.15–0.20) to ensure consistent text contrast. Add a subtle dark inner shadow or gradient overlay on glass panels to stabilize the background behind text. Use Semi-bold+ weights — thin text is dangerously illegible on glass.
+
+### Focus States
+Style-consistent focus indicators that remain visible on glass:
+```css
+/* Focus ring that works on glass surfaces */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.3); /* accent glow */
+}
+```
+
+### Motion Sensitivity
+- **Essential**: The blur effect itself is static and accessibility-safe.
+- **Disable with `prefers-reduced-motion`**: Parallax between background and glass layers, animated background blobs/orbs, hover scale transitions, entrance animations.
+- Keep fade-in opacity transitions (they're subtle enough to be safe).
+
+### Screen Reader Considerations
+- Background colorful blobs/orbs are purely decorative — use `aria-hidden="true"`.
+- Glass panels don't need special ARIA roles — they're just containers.
+- Ensure any floating/overlapping layout order makes semantic sense in the DOM.
+
 ## Do's and Don'ts
 
 ### Do
-- Ensure text has sufficient contrast against the glass surface (WCAG AA minimum)
+- Ensure text has sufficient contrast against the glass surface (WCAG AA minimum) — test against the brightest area behind the glass
 - Test readability with different background colors/images beneath the glass
 - Use the glass effect on a limited number of surface types (cards, navbars, modals) — not everything
 - Keep backgrounds vibrant — the glass effect is only as good as what's behind it
 - Use consistent blur intensity and opacity across all glass surfaces
 - Add the subtle white border — it makes or breaks the glass illusion
+- Provide a solid-background fallback for browsers that don't support `backdrop-filter`
+- Use `prefers-reduced-motion` to disable animated background elements
 
 ### Don't
-- Stack multiple glass layers on top of each other (blur compounds and kills readability)
-- Use thin font weights on glass surfaces
-- Apply glass effect to tiny elements (buttons, badges) — it's for surfaces, not widgets
-- Forget the background — glass over a plain white/black background looks like a broken opacity, not like glass
-- Use heavy saturated colors for the glass surface itself (it should be neutral/white/dark)
-- Mix glassmorphism with drop-shadow-heavy designs — pick one depth model
+- Stack multiple glass layers on top of each other — blur compounds and kills readability because each layer re-blurs everything below, creating an illegible soup
+- Use thin font weights on glass surfaces — the translucency makes thin text shimmer and disappear, breaking readability
+- Apply glass effect to tiny elements (buttons, badges) — glass needs surface area to show the frosted effect; on small elements it just looks like broken opacity
+- Forget the background — glass over a plain white/black background is not glassmorphism, it's just semi-transparent cards with no purpose
+- Use heavy saturated colors for the glass surface itself — the surface should be neutral/white/dark so it acts as a lens, not a filter
+- Mix glassmorphism with drop-shadow-heavy designs — the depth model is transparency and blur, not elevation and shadow
 
 ## Implementation Hints (Tailwind + CSS)
 

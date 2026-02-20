@@ -181,6 +181,26 @@ Animation in Organic design is **smooth, gentle, and nature-inspired** — like 
 - **Background blobs**: Slowly drift and morph (CSS animation over 10-20s)
 - **Avoid**: Anything sharp, instant, mechanical, or bouncy. Movement should feel like breathing.
 
+## Dark Mode & Light Mode
+
+Light-first (warm cream/sand backgrounds are the signature). Dark mode: use warm dark tones (NOT cool grays — use #1C1917, #292524, stone-900/800). Nature-inspired dark colors: deep forest green (#1A2E1A), dark earth brown (#2C2118), night sky (#1A1B2E). Accent colors (sage, terracotta, ocean teal) stay the same. Blob backgrounds become deeper/richer. Wave dividers transition between dark tones. Text: warm cream (#FAF8F3). The warmth is NON-NEGOTIABLE in dark mode.
+
+## Responsive & Mobile
+
+Generous spacing (100-140px sections) compresses: → 60-80px tablet, → 40-60px mobile. Wave/blob SVG dividers must be responsive (use viewBox, not fixed widths). Blob background shapes: simplify on mobile (fewer blobs, less blur for performance). Pill buttons: naturally mobile-friendly. Typography: moderate headings compress gently. Touch targets: pill buttons are already generous. Layout: flowing single-column is natural on mobile. Performance concern: blob blur effects and SVG waves can be expensive — simplify on low-end mobile.
+
+## Content & Voice
+
+Warm, nurturing, nature-connected. Like a wellness brand or farm-to-table restaurant. Headlines are sensory and evocative ("Grown with care", "Nature's way", "Rooted in wellness", "From seed to table"). Body copy uses natural metaphors and sensory language (texture, warmth, growth, nourishment). CTAs are invitational: "Discover", "Explore", "Begin your journey". Error messages are gentle and encouraging. Emojis of nature elements are welcome sparingly (leaf, sun, seedling). Content density: LOW — generous whitespace mirrors the breathing room of nature.
+
+## Icons & Illustrations
+
+Rounded, organic line icons (2px stroke, rounded caps and joins). Nature-themed when possible: leaf, water drop, sun, plant, seedling, wave. Avoid geometric/sharp icons. Illustration: watercolor-style, botanical drawings, nature photography with warm treatment. Hand-drawn elements are welcome. Photography is CRITICAL: natural light, textures (wood, ceramic, linen, stone), organic produce, plants, warm interiors. Desaturated/warm color treatment. Recommend: Phosphor Icons (regular weight, rounded), custom organic icons.
+
+## Accessibility
+
+Known risks: warm low-contrast palette (similar to Japandi). Warm dark text (#3B3530) on warm cream (#FAF8F3) gives ~9:1 contrast (good). Secondary text (#7D756D) on cream: ~4.2:1 (borderline). Darken to #6D655D. Blob shapes and wave dividers are decorative — aria-hidden. Focus states: accent-colored organic ring (pill-shaped outline matching the rounded aesthetic). prefers-reduced-motion: disable floating blob animations, wave parallax. Keep simple opacity transitions. SVG waves are static — no motion concern.
+
 ## Do's and Don'ts
 
 ### Do

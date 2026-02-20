@@ -174,6 +174,205 @@ Animation in Neubrutalism is **snappy and mechanical** — things click into pla
 - **Playful touches**: Slight rotation on hover, subtle bounce on click, sticker-wobble effect on badges
 - **Avoid**: Slow, fluid, glassmorphic-style animations. Nothing should feel luxurious.
 
+## Dark Mode & Light Mode
+
+### Philosophy
+Neubrutalism is a **light-first style** — those bold colored backgrounds (pink, lime, lavender) ARE the aesthetic. They're the first thing people recognize. That said, dark mode is absolutely doable — it just requires deliberate choices to keep the aggressive Neubrutalist energy intact.
+
+### Light Mode (Default)
+This is home base. Bold saturated background fills, pure black borders, pure black hard shadows, pure black text. Everything in the Non-Negotiables section assumes light mode. If you only ship one mode, ship this one.
+
+### Dark Mode Approach
+Dark mode Neubrutalism flips the contrast anchor but keeps the same punk energy:
+
+- **Base background**: Near-black `#0A0A0A` — not gray, not charcoal. Almost-black. In Tailwind: `bg-[#0A0A0A]` or `dark:bg-neutral-950`.
+- **Card fills**: Keep them bright and saturated. Yellow `#FEF9C3`, hot pink `#FFD6E0`, acid green `#CCFF00` — these pop HARDER against near-black. Don't mute them. The saturation is the whole point.
+- **Borders**: Switch from black to **white** `#FFFFFF` at the same chunky weight (3px). `border-[3px] border-white` or `dark:border-white`. The thick border is still non-negotiable — you're just inverting the contrast color.
+- **Shadows**: Here's where it gets fun. Black shadows disappear into a black background (obviously). Switch to **colored hard shadows** instead:
+  - `box-shadow: 4px 4px 0px #3B82F6` (electric blue)
+  - `box-shadow: 4px 4px 0px #EC4899` (hot pink)
+  - `box-shadow: 4px 4px 0px #CCFF00` (acid green)
+  - In Tailwind: `dark:shadow-[4px_4px_0px_#3B82F6]`
+  - Pick one shadow color per page or section and commit.
+- **Text**: White `#FFFFFF` or near-white `#F5F5F5` on the dark base. On bright card fills, text stays black `#000000` — the card surface is light enough.
+- **Hover interaction**: Same shadow-press mechanic, just with the colored shadow: `dark:hover:shadow-none dark:hover:translate-x-1 dark:hover:translate-y-1`
+
+### Tailwind Dark Mode Example
+```
+/* Card in dark mode */
+dark:bg-[#0A0A0A]                              /* Page background */
+dark:border-white dark:border-[3px]             /* White chunky border */
+dark:shadow-[4px_4px_0px_#3B82F6]              /* Colored hard shadow */
+dark:text-white                                 /* White body text */
+dark:hover:shadow-none dark:hover:translate-x-1 dark:hover:translate-y-1
+
+/* Button in dark mode */
+dark:bg-[#EC4899] dark:text-black dark:border-white dark:border-[3px]
+dark:shadow-[4px_4px_0px_#CCFF00]
+```
+
+### The Rule
+Maintain **aggressive contrast** in both modes. If your dark mode feels calm, muted, or "sophisticated," you've lost the plot. Dark mode Neubrutalism should still punch you in the face — just with inverted contrast.
+
+## Responsive & Mobile
+
+### Philosophy
+Neubrutalism's chunky, blocky aesthetic translates to mobile surprisingly well — the style was practically built for stacking cards. But those 96px headings? Those need to come way down. The thick borders stay. The attitude stays. The scale adjusts.
+
+### Typography Scaling
+The extreme desktop hierarchy must scale dramatically on small screens:
+
+| Element | Desktop | Mobile (< 640px) |
+|---------|---------|-------------------|
+| Hero heading | 64px–96px | 28px–42px |
+| Section heading | 36px–48px | 24px–32px |
+| Card heading | 24px–32px | 18px–24px |
+| Body text | 16px–18px | 16px (don't go smaller) |
+
+- Keep the weight (Black 900, Extra-Bold 800) at ALL sizes. The boldness is load-bearing — it's not optional on mobile.
+- ALL CAPS headings can stay but consider switching to Title Case below 32px for readability.
+- Tight line-height on headings (0.9–1.1) can relax slightly on mobile (1.0–1.2) to avoid cramped stacking.
+
+### Borders & Shadows on Mobile
+- **Thick borders are non-negotiable.** Keep `border-[3px] border-black` on mobile. These are the DNA of the style — if you thin them out, it stops being Neubrutalism.
+- **Shadow offset can reduce**: Drop from `8px 8px` to `4px 4px` on mobile. The shadow is still visible and hard, just doesn't eat as much space. In Tailwind: `shadow-[8px_8px_0px_#000] sm:shadow-[4px_4px_0px_#000]` (mobile-first: swap the breakpoints as needed).
+- The shadow-press hover interaction works fine on tap — mobile browsers handle `:active` states. Consider `active:shadow-none active:translate-x-0.5 active:translate-y-0.5` for touch feedback.
+
+### Layout Behavior
+- **Blocky cards stack naturally.** Neubrutalism's bordered-card-grid layout collapses into a single-column stack on mobile with zero awkwardness. Each card is a self-contained block.
+- **Remove card rotations on mobile.** Those `transform: rotate(-1deg)` and `rotate(2deg)` effects that add playfulness on desktop eat precious horizontal space on small screens and can cause horizontal scroll. `sm:rotate-0` or simply don't apply rotations below `sm`.
+- **Generous padding scales down**: Desktop card padding of 32px–40px can drop to 16px–24px on mobile. Still generous by normal standards — Neubrutalism cards should never feel cramped.
+- **Overlapping elements**: Pull back on overlaps and offsets on mobile. The collage effect needs breathing room that phones don't have.
+
+### Touch Targets & Performance
+- **Touch targets are already generous.** The chunky buttons and thick-bordered inputs that Neubrutalism demands (48px+ height, generous padding) naturally meet the 44px minimum touch target. This is one of the style's secret mobile strengths.
+- **Performance is a non-issue.** Hard shadows (`box-shadow` with 0 blur) are GPU-cheap — way cheaper than blurred shadows. Thick borders are simple box-model. No blur filters, no glassmorphism, no expensive compositing. Neubrutalism is fast by nature.
+
+## Content & Voice
+
+### Philosophy
+Neubrutalism's voice matches its visuals: **IRREVERENT, punchy, direct, and fun.** This isn't enterprise copy. This is the startup landing page that makes you smile, the product that talks to you like a friend, the UI that has actual personality. If your copy could appear in a corporate annual report, rewrite it.
+
+### Headlines
+Short. Bold. Sometimes cheeky. Headlines in Neubrutalism do WORK — they're big, they're loud, and they say something with conviction:
+- "No BS pricing"
+- "Built different"
+- "Ship it already"
+- "Make cool stuff"
+- "Your app, but actually good"
+- Headlines should fit in 2–5 words when possible. If it needs a subhead, the subhead does the explaining.
+
+### Body Copy
+Casual, conversational, uses contractions. Write like you're talking to a smart friend:
+- "We built this because the alternatives sucked" — not "Our solution addresses key market pain points"
+- "It just works. Seriously." — not "Seamlessly integrated functionality"
+- "You'll love it or we'll cry" — not "Customer satisfaction guaranteed"
+- Short paragraphs. One idea per block. Let the whitespace and chunky cards do the visual heavy lifting.
+
+### CTAs (Calls to Action)
+Action verbs. First person when it fits. Energy:
+- "Let's go"
+- "Try it free"
+- "Get weird"
+- "Start building"
+- "Grab it"
+- "Ship it"
+- Avoid generic: "Submit," "Learn more," "Click here" — these have zero personality.
+
+### Error Messages & Microcopy
+This is where Neubrutalism's voice really shines. Every micro-interaction is an opportunity for personality:
+- Error: "Oops. That didn't work. Try again?" — not "An error has occurred"
+- Empty state: "Nothing here yet. Make something!" — not "No items to display"
+- Loading: "Hang tight..." or "Working on it..." — not "Please wait"
+- Success: "Nailed it!" or "You're in!" — not "Operation completed successfully"
+- 404: "This page ghosted you" — not "Page not found"
+- Tooltip: Keep it casual, keep it brief, keep it human.
+
+### The Rule
+Read your copy out loud. If it sounds like a robot wrote it, a lawyer approved it, or a committee diluted it — rewrite it. Neubrutalism copy should have the same energy as the visuals: bold, honest, and a little bit punk.
+
+## Icons & Illustrations
+
+### Philosophy
+Icons and illustrations in Neubrutalism follow the same rule as everything else: **bold, chunky, and high-contrast.** They should feel like they belong next to 3px borders and hard shadows — not like they wandered in from a minimalist SaaS dashboard.
+
+### Icon Style
+- **Thick strokes (2px+)** matching the border weight of the UI. If your borders are 3px, your icon strokes should feel visually equivalent.
+- **Filled or bold outline** variants. Solid fills with black outlines are the most Neubrutalist option.
+- **Avoid thin line icons.** A 1px Feather icon next to a 3px bordered card looks like a mismatch. The weights clash and the icon feels fragile.
+- Icons can have black outlines/strokes matching the border color, reinforcing the thick-border DNA.
+
+### Recommended Icon Sets
+- **Heroicons (Solid)** — Bold, clean, designed for thick-weight contexts. The solid variants are perfect.
+- **Phosphor Icons (Bold)** — Excellent weight options. The Bold variant at 2px+ stroke is ideal for Neubrutalism.
+- **Custom chunky icons** — If you have the resources, hand-drawn or custom thick-stroke icons are the gold standard. They feel authentic.
+- Avoid: Feather Icons (too thin), Lucide at default weight (too delicate), any icon set that only offers 1px–1.5px strokes.
+
+### Illustrations
+- **Hand-drawn or sketch-style illustrations** are a perfect match. Wobbly lines, rough fills, visible strokes — they reinforce the raw, authentic energy.
+- **Sticker-style graphics**: Bold black outlines, flat color fills, slight shadow or white border. Think laptop stickers, zine cutouts, or die-cut art.
+- **Collage-style compositions**: Layer illustrations, photos, and graphic elements with visible borders and offsets. The collage aesthetic is peak Neubrutalism.
+- Keep illustrations high-contrast — they should hold up against bold background colors.
+
+### Photography
+When using photos in Neubrutalism:
+- **Bold, candid, slightly messy** — not stock-photo polished. Real moments, slightly chaotic energy.
+- Always place photos inside thick-bordered containers. A photo without a border feels naked in this style.
+- Consider adding a slight rotation (1–2deg) to photo containers for that collage feel.
+- Duotone or high-contrast photo treatments can work well but aren't required.
+- Avoid: Clean, corporate headshots. Sterile product photography. Anything that feels "curated."
+
+## Accessibility
+
+### Philosophy
+Here's the thing — **Neubrutalism is one of the MOST accessible visual styles by nature.** High contrast, thick borders, large text, and clear visual hierarchy are accessibility fundamentals, and Neubrutalism cranks all of them to the max. Lean into this strength. Don't let "accessibility" become an excuse to water down the style — the style IS accessible.
+
+### Built-In Strengths
+- **Contrast ratios**: Pure black text (#000000) on saturated pastel backgrounds naturally meets **WCAG AAA** contrast requirements (7:1+). You get this for free.
+- **Thick borders**: 2–3px borders provide clear visual boundaries between elements. Users with low vision can distinguish interactive areas easily.
+- **Large typography**: 48px–96px headings are visible from across the room. Even at mobile sizes (28px–42px), headings are generous.
+- **Clear hierarchy**: The extreme size difference between headings and body text creates unambiguous visual hierarchy. There's no guessing what's important.
+- **No transparency/blur**: Unlike glassmorphism, nothing is semi-transparent or blurred. Every element has a solid, clear background. Text is always on an opaque surface.
+
+### Known Risks & Mitigations
+
+**Card rotations and motion sensitivity:**
+Slight card rotations (`rotate(-1deg)` to `rotate(2deg)`) can trigger discomfort for users with vestibular/motion sensitivity, especially when combined with scroll. Always wrap rotation transforms in a `prefers-reduced-motion` check:
+```css
+@media (prefers-reduced-motion: no-preference) {
+  .card-playful { transform: rotate(-1deg); }
+}
+/* Tailwind: motion-safe:rotate-[-1deg] */
+```
+
+**ALL CAPS and readability:**
+ALL CAPS headings are a Neubrutalism signature, but they reduce readability for dyslexic users — uppercase text removes the distinct word shapes that aid reading. Mitigations:
+- Keep ALL CAPS to headings only (short, 2–5 words). Never use ALL CAPS for body text or long strings.
+- Offer a sentence-case alternative via a user preference toggle if your product serves a broad audience.
+- Use `text-transform: uppercase` in CSS (not hardcoded caps) so screen readers process the original casing.
+
+**Color-only indicators:**
+Never rely on color alone to convey state (error, success, etc.). Neubrutalism's thick borders and bold typography make it easy to add icon + text + color for every state — do all three.
+
+### Focus States
+Focus indicators should match the chunky Neubrutalist aesthetic — don't fall back to the browser's thin default outline:
+- **Thick accent-colored outline**: `outline: 3px solid #3B82F6; outline-offset: 2px;`
+- **Or thick border swap**: Change the border color to accent on focus: `focus:border-[#3B82F6]` while keeping the 3px weight.
+- In Tailwind: `focus-visible:outline-[3px] focus-visible:outline-[#3B82F6] focus-visible:outline-offset-2`
+- The focus state should be as visually bold as everything else in the design. A thin dotted outline looks broken next to 3px borders.
+
+### Reduced Motion
+Respect `prefers-reduced-motion` for all animated elements:
+- **Disable**: Card rotation transforms, shadow-press hover transitions, entrance animations, badge wobble effects.
+- **Keep**: Color changes, opacity changes (instant), layout shifts that don't involve transform.
+```css
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .card-playful { transform: none; }
+}
+```
+In Tailwind: Use `motion-safe:` prefix for all transform and transition utilities: `motion-safe:hover:translate-x-1 motion-safe:hover:translate-y-1 motion-safe:transition-all`.
+
 ## Do's and Don'ts
 
 ### Do

@@ -1,14 +1,14 @@
 # UI Skills
 
-**Design direction for AI-generated UI.** 20 style guardrail files that give LLMs the context to build tasteful, consistent interfaces.
+**Design direction for AI-generated UI.** 21 style guardrail files that give LLMs the context to build tasteful, consistent interfaces.
 
-[Live Showcase](https://tools.heiberg.co/ui-skills) | [PolyForm Noncommercial](LICENSE)
+[Live Showcase](https://tools.heiberg.co/ui-skills) | [MIT License](LICENSE)
 
 ## What This Is
 
-Each style is a markdown file defining the **design DNA** of a visual direction — typography, color theory, spacing philosophy, component behavior, and implementation guidance. These are **guardrails, not templates**. They define *what kind of* font, color, and spacing — not the exact values.
+Each style is a markdown file defining the **design DNA** of a visual direction — typography, color theory, spacing philosophy, component behavior, dark mode, responsive design, content voice, icons, accessibility, and implementation guidance. These are **guardrails, not templates**. They define *what kind of* font, color, and spacing — not the exact values.
 
-Think of it as giving your AI coding assistant design taste.
+Think of it as giving your AI coding assistant design taste. Each style also teaches *why* design choices matter — building the user's intuition over time.
 
 ## Available Styles
 
@@ -23,6 +23,7 @@ Think of it as giving your AI coding assistant design taste.
 | **Corporate Modern** | Professional, trustworthy, clean | Enterprise SaaS, B2B, consulting, finance |
 | **Dark Mode Premium** | Sophisticated, cinematic, exclusive | Media apps, creative tools, fintech, gaming |
 | **Flat Design** | Clean, bold, iconic | Mobile apps, Microsoft ecosystem, content platforms |
+| **Freeform** | Personal, eclectic, expressive, unbound | Personal sites, creative portfolios, passion projects |
 | **Glassmorphism** | Futuristic, elegant, premium | SaaS dashboards, fintech, landing pages |
 | **Japandi** | Calm, minimal, warm, natural | Wellness, hospitality, premium retail, architecture |
 | **Material Design** | Systematic, accessible, reliable | Android apps, Google ecosystem, enterprise tools |
@@ -37,9 +38,43 @@ Think of it as giving your AI coding assistant design taste.
 
 ## Installation
 
-### Claude Code / OpenAI Codex / GitHub Copilot
+### Quick Install (recommended)
 
-One-liner — clone into your tool's skill directory:
+```bash
+npx ui-skills
+```
+
+Auto-detects your tool and copies the skill files into the right place. Supports Claude Code, Cursor, Windsurf, GitHub Copilot, and OpenAI Codex.
+
+```bash
+# Or specify your tool directly:
+npx ui-skills --tool claude
+npx ui-skills --tool cursor
+```
+
+### Via skills.sh
+
+```bash
+npx skills add Heiberg-Industries/ui-skills
+```
+
+### Via skild.sh
+
+```bash
+skild install Heiberg-Industries/ui-skills
+```
+
+Then just ask for UI:
+
+```
+"Build a landing page for my SaaS product — use the Glassmorphism style"
+"I need a dashboard. What style would work for a fintech startup?"
+```
+
+### Manual Install
+
+<details>
+<summary>Claude Code / OpenAI Codex / GitHub Copilot</summary>
 
 ```bash
 # Claude Code
@@ -52,14 +87,10 @@ git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git .agents/
 git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git .github/skills/ui-skills
 ```
 
-Then just ask for UI:
+</details>
 
-```
-"Build a landing page for my SaaS product — use the Glassmorphism style"
-"I need a dashboard. What style would work for a fintech startup?"
-```
-
-### Cursor
+<details>
+<summary>Cursor</summary>
 
 ```bash
 git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git /tmp/ui-skills
@@ -68,7 +99,10 @@ cp -r /tmp/ui-skills/styles/ styles/
 rm -rf /tmp/ui-skills
 ```
 
-### Windsurf
+</details>
+
+<details>
+<summary>Windsurf</summary>
 
 ```bash
 git clone --depth 1 https://github.com/Heiberg-Industries/ui-skills.git /tmp/ui-skills
@@ -77,11 +111,17 @@ cp -r /tmp/ui-skills/styles/ styles/
 rm -rf /tmp/ui-skills
 ```
 
-### Lovable / Bolt.new / v0
+</details>
+
+<details>
+<summary>Lovable / Bolt.new / v0</summary>
 
 See [PASTE-INSTRUCTIONS.md](PASTE-INSTRUCTIONS.md) for copy-paste instructions specific to each tool.
 
-### Manual / Any LLM
+</details>
+
+<details>
+<summary>Manual / Any LLM</summary>
 
 Copy a style file into your prompt or context:
 
@@ -91,6 +131,8 @@ Here are the design guardrails for this project:
 
 Now build a pricing page following these guidelines.
 ```
+
+</details>
 
 ## How It Works
 
@@ -112,10 +154,15 @@ Want to add a style? Use [STYLE-TEMPLATE.md](STYLE-TEMPLATE.md) as your starting
 6. **Borders & Shadows** — Radius, depth, effects
 7. **Components** — Buttons, cards, inputs, navigation
 8. **Motion** — Animation philosophy
-9. **Do's and Don'ts** — Critical guardrails
-10. **Implementation Hints** — Tailwind + CSS examples
-11. **Reference Touchstones** — Real-world inspiration
+9. **Dark Mode & Light Mode** — Mode-specific palette, CSS custom properties
+10. **Responsive & Mobile** — Typography scaling, spacing adaptation, performance notes
+11. **Content & Voice** — Headline tone, CTA language, microcopy personality
+12. **Icons & Illustrations** — Icon style, recommended sets, photography direction
+13. **Accessibility** — Contrast ratios, focus states, reduced motion, known risks
+14. **Do's and Don'ts** — Critical guardrails with "why" explanations
+15. **Implementation Hints** — Tailwind + CSS examples
+16. **Reference Touchstones** — Real-world inspiration
 
 ## License
 
-PolyForm Noncommercial 1.0 — free for non-commercial use. See [LICENSE](LICENSE) for details.
+MIT — free for any use. See [LICENSE](LICENSE) for details.

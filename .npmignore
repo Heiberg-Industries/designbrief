@@ -1,0 +1,9 @@
+.git
+.gitignore
+.github/
+.DS_Store
+CLAUDE.md
+STYLE-TEMPLATE.md
+PASTE-INSTRUCTIONS.md
+docs/
+node_modules/

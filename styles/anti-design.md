@@ -156,6 +156,176 @@ Animation in Anti-Design is either ABSENT (static is punk) or JARRING (sudden, u
 - **Content that moves without user action**: An element that slowly drifts or rotates
 - **Avoid**: Smooth easing, pleasant transitions, choreographed entrances — those are too "designed"
 
+## Dark Mode & Light Mode
+
+Anti-Design **rejects the premise** of polished dark/light mode toggling. However, it uses dark and light as TOOLS of confrontation.
+
+### Approach A: Black (The Punk Default)
+- Background: Pure black (#000000) — not "near-black," PURE black
+- Text: Neon green (#00FF00), white, or clashing neon colors
+- The void-black background is aggressive and stage-like
+
+### Approach B: White (The Mundane Assault)
+- Background: Pure white (#FFFFFF)
+- Text: Pure black (#000000), system blue (#0000FF)
+- This "unstyled" look is itself an Anti-Design statement — deliberately looking like someone forgot to design it
+
+### Approach C: Clash Mode
+- Different sections use DIFFERENT background colors with NO transition
+- One section black, next neon yellow, next white, next hot pink
+- The inconsistency IS the design. There is no unified "mode."
+
+### The Anti-Design Position on Mode Toggling
+- A polished dark/light toggle with smooth transitions is the OPPOSITE of Anti-Design
+- If implementing both modes: make the toggle itself confrontational (instant swap, no transition, maybe it's in an unexpected place)
+- Or: don't offer a toggle. Pick one and commit. The user doesn't get to be comfortable.
+
+### CSS (if you must)
+```css
+:root {
+  --anti-bg: #000000;
+  --anti-text: #00FF00;
+  --anti-accent: #FF00FF;
+  --anti-system-blue: #0000FF;
+  --anti-raw-gray: #808080;
+}
+/* No smooth transitions. No elegant color scheme. */
+```
+
+## Responsive & Mobile
+
+Anti-Design's relationship with responsive design is DELIBERATELY UNCOMFORTABLE — but the content must still be reachable.
+
+### Typography Scaling
+- Hero headings: Desktop 150-200px → Mobile 60-80px (still massive relative to body text)
+- Body: 12-14px across breakpoints (small is intentional — it creates scale tension)
+- The extreme scale contrast (huge heading, tiny body) should persist on mobile, just at smaller absolutes
+
+### Spacing Adaptation
+- Desktop's extreme spacing (200px gaps next to 0px gaps) compresses proportionally
+- Overlapping elements: May need to reduce overlap on mobile to prevent unreadable content
+- Full-bleed color blocks: Work perfectly on mobile
+
+### Layout Behavior
+- Broken grid: STILL broken on mobile, but may need to be a different kind of broken
+- Elements that bleed off-screen on desktop: May be completely invisible on mobile — ensure critical content is still reachable
+- Rotated elements (-2deg to -5deg): Keep on mobile — they're lightweight and still confrontational
+- Vertical text: May not fit on mobile — consider omitting or rotating differently
+
+### Touch Targets
+- Anti-Design's tiny, confrontational buttons are an accessibility nightmare on mobile
+- COMPROMISE: Make touch targets 44px minimum even if the visible button looks small (use padding)
+- The visual can be tiny and raw; the touch area must be functional
+
+### Performance
+- Anti-Design is naturally LIGHTWEIGHT — mostly text, solid colors, and CSS effects
+- Glitch animations (clip-path + transform): Lightweight
+- mix-blend-mode: difference on text: Can cause compositing cost — acceptable for headings, not for large areas
+- Custom cursors: No mobile equivalent — degrade gracefully
+- Marquee/scroll animations: Keep simple — use CSS transform for smooth scrolling text
+
+## Content & Voice
+
+### Headline Tone
+CONFRONTATIONAL and PROVOCATIVE — Anti-Design text is a weapon:
+- "THIS IS NOT A WEBSITE"
+- "DESIGN IS DEAD"
+- "YOU ARE HERE"
+- "404: EVERYTHING"
+- Ironic, self-referential, meta-aware. Can quote or reference design conventions while breaking them.
+
+### Body Copy
+Raw, direct, and potentially uncomfortable:
+- Can be extremely short ("No.") or extremely long (an entire essay with no paragraph breaks)
+- Uses monospace for a raw, "source code" feel
+- Can mix languages, registers, or modes (a paragraph of formal English followed by a one-word sentence)
+- Footnotes and metadata visible inline — nothing is hidden
+
+### CTAs
+Anti-CTAs — deliberately subverting CTA conventions:
+- "Click here, I guess"
+- "ENTER" (in monospace, no styling)
+- "[submit]" (in brackets, like raw HTML)
+- "Don't click this"
+- The CTA might not look like a button at all — just underlined text, or bold text with a cursor: pointer
+
+### Microcopy
+Self-aware and irreverent:
+- Error: "BROKEN. (what did you expect?)"
+- Empty state: "VOID." or "There is nothing here. There was never anything here."
+- Loading: "..." or no loading state at all (rawness)
+- Tooltip: "You already know what this does."
+
+### Content Density
+VARIABLE — Anti-Design can be aggressively sparse (one sentence on a white page) or aggressively dense (text overlapping text, no whitespace). The inconsistency IS the content strategy. What matters: the content must be FINDABLE even if it's not comfortable.
+
+## Icons & Illustrations
+
+### Icon Style
+System defaults or deliberately crude:
+- System icons (browser defaults, OS defaults) — the "I didn't design this" statement
+- Raw emoji as icons: 🔥 ❌ ⚡ → (arrow characters instead of arrow icons)
+- Custom: Crude, hand-drawn-looking, or aggressively geometric (sharp, oversized, clashing with the text)
+- MISSING icons (just text labels where icons would be) is a valid Anti-Design choice
+
+### Recommended Approach
+- Don't use a polished icon set — that's too designed
+- Use system characters: → ← ↑ ↓ × + = ≠ ● ■ ▲
+- Use raw emoji
+- Or: use a polished icon set but at WRONG sizes, rotated, or in clashing colors — the misuse of good icons is more Anti-Design than bad icons
+
+### Illustrations
+- Photography: Raw, unprocessed, wrong aspect ratio, pixelated intentionally
+- Collage: Cut-and-paste compositions mixing photography, text, and geometric shapes
+- Glitch art: Corrupted or processed images
+- Screenshots: Screenshots of other interfaces, code, error messages
+- The "illustration" might just be a colored rectangle or a raw gradient
+
+### Typography AS Illustration
+In Anti-Design, text IS the visual art:
+- Oversized words that span the entire viewport
+- Text overlapping text
+- Code snippets displayed as visual elements
+- The boundary between "content" and "decoration" is deliberately erased
+
+## Accessibility
+
+### Contrast
+Anti-Design has an inherent TENSION with accessibility — clashing colors and deliberate discomfort can harm usability.
+
+**Rules to follow even in Anti-Design:**
+- ALL body text must meet WCAG 4.5:1 minimum — no exceptions for style
+- Neon green (#00FF00) on black (#000000): ~5.2:1 — PASSES (barely). Consider #33FF33 for more margin.
+- Neon pink (#FF00FF) on black: ~3.6:1 — FAILS for small text. Use only on large headings.
+- System blue (#0000FF) on white: ~8.6:1 — PASSES
+- Yellow (#FFFF00) on white: ~1.1:1 — FAILS BADLY. Use only on dark backgrounds.
+- Yellow (#FFFF00) on black: ~19.6:1 — excellent
+- If you want intentionally low contrast for stylistic effect: apply ONLY to decorative elements, never to content-bearing text
+
+### Focus States
+Raw and visible — no need to make them pretty:
+```css
+:focus-visible {
+  outline: 3px solid #FF00FF;
+  outline-offset: 2px;
+  /* No border-radius — sharp, raw, visible */
+}
+```
+In Anti-Design, a bold, ugly focus ring is more on-brand than a subtle one.
+
+### Motion
+- `prefers-reduced-motion`: Disable glitch animations, marquee scrolling, drifting elements, RGB offset effects
+- Keep: Static clashing colors, broken grid, overlapping elements, mixed fonts — these are LAYOUT choices, not motion
+- Anti-Design relies primarily on static visual transgression — it works almost entirely without animation
+
+### Known Risks
+- **Overlapping text**: Can make content completely unreadable for screen readers AND sighted users. Ensure overlapping text is `aria-hidden` if it's decorative, or ensure the readable version is accessible.
+- **Intentionally "broken" navigation**: If nav is in an unexpected position or style, screen reader users relying on landmark navigation may not find it. Keep semantic HTML (`<nav>`, `<main>`, `<header>`) even if visual presentation is chaotic.
+- **Color clashing**: Neon on neon (#FF00FF on #00FF00) creates visual vibration that can trigger migraines and seizures. NEVER combine high-saturation complementary colors as text/background pairs.
+- **Custom cursors**: Can confuse users with motor impairments. Always ensure standard cursor on interactive elements.
+- **Extreme font size contrasts**: 200px headings next to 10px body text — the 10px text may be unreadable for many users. Consider 12px as the absolute minimum for any content-bearing text.
+- **CRITICAL**: Anti-Design breaks visual conventions, NOT semantic ones. Maintain proper heading hierarchy (h1 → h2 → h3), form labels, alt text, and ARIA landmarks. The HTML should be well-structured even when the visual presentation is chaotic.
+
 ## Do's and Don'ts
 
 ### Do
@@ -169,13 +339,13 @@ Animation in Anti-Design is either ABSENT (static is punk) or JARRING (sudden, u
 - Overlap elements aggressively
 
 ### Don't
-- Make it truly unusable — Anti-Design is provocative, not broken
-- Be random without intention — every rule-break should be a choice
+- Make it truly unusable — because Anti-Design is a DESIGN choice, not the absence of design; a punk band still plays in a venue with exits and a stage, and your interface still needs navigable content
+- Be random without intention — because unthinking chaos is just bad design; every rule-break should make the viewer question the convention, not question whether the designer was paying attention
 - Mistake "ugly" for Anti-Design — it's deliberately confrontational, not carelessly ugly
 - Use it for products where confusion has consequences (healthcare, finance)
 - Go Anti-Design on 100% of the interface — even punk albums have tracklists. Core navigation and interaction points need minimum functionality.
 - Lose the content — the message matters. Anti-Design amplifies content, doesn't obscure it.
-- Apply it timidly — half-measures produce bad design, not Anti-Design. Commit fully.
+- Apply it timidly — because half-measures produce something that looks like bad design rather than deliberate provocation; Anti-Design requires full commitment to work
 
 ## Implementation Hints (Tailwind + CSS)
 

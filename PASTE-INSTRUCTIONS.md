@@ -12,10 +12,14 @@ Go to **Manage Knowledge** and paste this:
 I use UI Skills for design direction. When building UI, follow these rules:
 
 1. Ask me which style to use, or suggest one based on my project
-2. Available styles: Anti-Design, Art Deco, Aurora, Bauhaus, Bento Grid, Claymorphism, Corporate Modern, Dark Mode Premium, Flat Design, Glassmorphism, Japandi, Material Design, Minimalism, Neubrutalism, Neumorphism, Organic, Retro-Futurism, Skeuomorphism, Swiss Design, Y2K Revival
+2. Available styles: Anti-Design, Art Deco, Aurora, Bauhaus, Bento Grid, Claymorphism, Corporate Modern, Dark Mode Premium, Flat Design, Freeform, Glassmorphism, Japandi, Material Design, Minimalism, Neubrutalism, Neumorphism, Organic, Retro-Futurism, Skeuomorphism, Swiss Design, Y2K Revival
 3. Once a style is chosen, apply its design direction consistently across all components
-4. Each style defines: typography families, color palette, spacing philosophy, border/shadow treatment, component styling, and motion behavior
-5. Prioritize readability and accessibility over style purity
+4. Each style defines: typography, color palette, spacing, components, motion, dark mode, responsive behavior, content & voice, icons, and accessibility
+5. Ask if I want dark mode, light mode, or both — check the style's Dark Mode section
+6. Apply responsive guidance — ensure touch targets (44px min) and mobile spacing
+7. Match copy tone to the style's Content & Voice section
+8. Verify contrast ratios and focus states per the style's Accessibility section
+9. Prioritize readability and accessibility over style purity
 
 For the full style guide for each style, see: https://github.com/Heiberg-Industries/ui-skills/tree/main/styles
 ```
@@ -30,9 +34,11 @@ Go to **Project Settings → System Prompt** and paste:
 Follow the UI Skills design system. When building UI:
 
 1. Ask which style to use or suggest based on context
-2. Available: Anti-Design, Art Deco, Aurora, Bauhaus, Bento Grid, Claymorphism, Corporate Modern, Dark Mode Premium, Flat Design, Glassmorphism, Japandi, Material Design, Minimalism, Neubrutalism, Neumorphism, Organic, Retro-Futurism, Skeuomorphism, Swiss, Y2K Revival
-3. Apply the chosen style consistently — typography, color, spacing, components, motion
-4. Full style guides: https://github.com/Heiberg-Industries/ui-skills/tree/main/styles
+2. Available: Anti-Design, Art Deco, Aurora, Bauhaus, Bento Grid, Claymorphism, Corporate Modern, Dark Mode Premium, Flat Design, Freeform, Glassmorphism, Japandi, Material Design, Minimalism, Neubrutalism, Neumorphism, Organic, Retro-Futurism, Skeuomorphism, Swiss, Y2K Revival
+3. Apply the chosen style consistently — typography, color, spacing, components, motion, dark mode, responsive, content voice, icons, accessibility
+4. Ask about dark mode preference — each style has specific dark/light guidance
+5. Ensure accessibility: contrast ratios, focus states, reduced motion support
+6. Full style guides: https://github.com/Heiberg-Industries/ui-skills/tree/main/styles
 
 Style quick reference:
 - Bauhaus: 0px radius, 2px black borders, primary colors, geometric shapes, no shadows
@@ -41,6 +47,7 @@ Style quick reference:
 - Minimalism: extreme whitespace, near-monochromatic, no shadows, typography-driven
 - Dark Mode Premium: layered dark surfaces, restrained accent glow, text opacity hierarchy
 - Corporate Modern: blue-dominant, consistent 8-12px radius, professional, clean sections
+- Freeform: no prescribed aesthetic, personal choices, one signature element, internal consistency
 ```
 
 ---
@@ -52,11 +59,11 @@ Go to **Settings → Custom Instructions** and paste:
 ```
 When generating UI, use the UI Skills design system:
 
-Available styles (20 total): Anti-Design, Art Deco, Aurora, Bauhaus, Bento Grid, Claymorphism, Corporate Modern, Dark Mode Premium, Flat Design, Glassmorphism, Japandi, Material Design, Minimalism, Neubrutalism, Neumorphism, Organic, Retro-Futurism, Skeuomorphism, Swiss, Y2K Revival
+Available styles (21 total): Anti-Design, Art Deco, Aurora, Bauhaus, Bento Grid, Claymorphism, Corporate Modern, Dark Mode Premium, Flat Design, Freeform, Glassmorphism, Japandi, Material Design, Minimalism, Neubrutalism, Neumorphism, Organic, Retro-Futurism, Skeuomorphism, Swiss, Y2K Revival
 
-Full style guides with typography, color, spacing, component, and motion rules: https://github.com/Heiberg-Industries/ui-skills/tree/main/styles
+Full style guides with typography, color, spacing, components, motion, dark mode, responsive, content voice, icons, and accessibility: https://github.com/Heiberg-Industries/ui-skills/tree/main/styles
 
-When I mention a style name, look up its guide and apply the design direction consistently.
+When I mention a style name, look up its guide and apply the design direction consistently. Each guide covers dark/light mode, responsive behavior, accessibility, and content tone.
 ```
 
 ---
@@ -74,6 +81,7 @@ When I mention a style name, look up its guide and apply the design direction co
 | Corporate Modern | Blue dominant, 8-12px radius, professional, structured |
 | Dark Mode Premium | Layered dark surfaces, accent glow, text opacity hierarchy |
 | Flat Design | Zero shadows/gradients, solid colors, bold flat icons |
+| Freeform | No prescribed aesthetic, personal choices, signature element, internal consistency |
 | Glassmorphism | Frosted glass (backdrop-blur), colorful blobs, translucent surfaces |
 | Japandi | Warm neutrals, serif+sans pairing, organic materials, minimal |
 | Material Design | Elevation shadows, 4px radius, systematic spacing, Roboto |

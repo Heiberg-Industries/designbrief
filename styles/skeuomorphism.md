@@ -164,6 +164,163 @@ Animation in Skeuomorphism is **physical and realistic**. Objects move as if the
 - **Switches**: Slide with momentum, slight overshoot
 - **Avoid**: Flat fades, linear timing, anything that doesn't reference physical movement
 
+## Dark Mode & Light Mode
+
+Skeuomorphism follows its MATERIAL metaphor for mode — the "mode" depends on what real-world object you're simulating.
+
+### Light Mode (Most Common)
+Most skeuomorphic interfaces use light materials:
+- Linen: #E8DFD0
+- Brushed aluminum: #D4D4D4, #C8C8C8
+- Paper: #FFFFF0, #FFF8DC
+- Light wood: #DEB887, #D2B48C
+- Light is natural because physical objects are typically viewed in daylight. Gradients go light-to-dark (top-to-bottom) simulating overhead lighting.
+
+### Dark Mode (Rich Materials)
+Dark skeuomorphism uses dark real-world materials:
+- Dark leather: #2C1810, #3B2618
+- Dark wood: #2E1B0E, #3E2723
+- Black brushed metal: #1A1A1A, #2D2D2D
+- Dark felt: #1A2E1A (dark green billiard felt)
+- Carbon fiber: #1A1A1A with subtle diagonal texture
+- Lighting REVERSES direction: highlights on bottom edges, shadows on top (simulating the object being below a light source in a dark room)
+- Gradients go dark-to-light (top-to-bottom) for surfaces
+- Text gets a REVERSED emboss: `text-shadow: 0 1px 0 rgba(255,255,255,0.1)` on light text over dark surfaces
+
+### CSS Custom Properties
+```css
+:root {
+  --skeu-surface: #E8E8E8;
+  --skeu-surface-dark: #CACACA;
+  --skeu-bg: #D4D4D4;
+  --skeu-text: #333333;
+  --skeu-highlight: rgba(255, 255, 255, 0.8);
+  --skeu-shadow: rgba(0, 0, 0, 0.25);
+  --skeu-accent: #007AFF;
+}
+.dark-skeu {
+  --skeu-surface: #2D2D2D;
+  --skeu-surface-dark: #1A1A1A;
+  --skeu-bg: #222222;
+  --skeu-text: #E0E0E0;
+  --skeu-highlight: rgba(255, 255, 255, 0.1);
+  --skeu-shadow: rgba(0, 0, 0, 0.5);
+}
+```
+
+## Responsive & Mobile
+
+### Typography Scaling
+- Headings: Desktop 24-32px → Mobile 20-26px (skeuomorphism uses SMALLER headings than modern styles)
+- Body: 13-16px (often smaller — matching physical interface text)
+- Embossed text effects: Keep on all sizes — the text-shadow is subtle enough to work at any size
+
+### Spacing Adaptation
+- Panels and toolbars: Desktop 12-16px padding → Mobile 8-12px
+- Skeuomorphism is inherently COMPACT — it's already tighter than modern standards
+- Between elements: 8-12px across breakpoints
+- Toolbar height: Desktop 44px → Mobile 44px (already at touch-target minimum)
+
+### Layout Behavior
+- Panel-based layout: Sidebars collapse into bottom drawers or slide-out panels on mobile
+- Toolbars: Stack or simplify — too many toolbar buttons on mobile creates unusable UI
+- Material textures: Scale with background-size cover — no adjustment needed
+- Beveled edges and shadows: Scale fine at any size
+
+### Touch Targets
+- Skeuomorphic buttons at 8px padding are TOO SMALL for touch — increase to 44px minimum height on mobile
+- Slider thumbs: Already round and large (good for touch), but ensure 44px minimum diameter
+- Toggle switches: Physical-looking switches are naturally touch-friendly
+
+### Performance
+- **Background texture images**: Keep tile images small (under 5KB). Use CSS gradients where possible instead of image tiles.
+- **Multiple box-shadow layers**: Moderate performance impact — skeuomorphism uses 2-3 shadow layers per element, which compounds in lists. Consider simplifying to 1-2 layers on mobile.
+- **Gradient buttons/toolbars**: CSS gradients are lightweight — no concern.
+- **Inset shadows + outer shadows combined**: Standard skeuomorphic patterns are well-optimized in modern browsers.
+
+## Content & Voice
+
+### Headline Tone
+Functional and descriptive — matching the physical-tool metaphor:
+- "Notes" (not "Your Digital Notebook Experience")
+- "Music Studio" (not "Create Amazing Sounds")
+- The UI speaks through its VISUAL metaphor, not through words. Labels name the tool; they don't sell it.
+- Headings should feel like labels on physical controls — clear, concise, factual.
+
+### Body Copy
+Instructional and clear — like a product manual:
+- "Drag the slider to adjust volume"
+- "Tap to record a new note"
+- Direct, second-person instructions
+- Minimal marketing language — the interface IS the experience, words support it
+
+### CTAs
+Tool-oriented — verbs that reference physical actions:
+- "Open", "Save", "Record", "Play", "Compose"
+- NOT "Get Started" or "Discover" — too abstract for skeuomorphism's physicality
+- CTAs should feel like pressing a physical button on a machine
+
+### Microcopy
+Functional and warm (like a helpful manual):
+- Error: "Unable to save. Check your connection and try again."
+- Empty state: "No recordings yet. Tap Record to begin."
+- Loading: "Loading..." with a visible progress indicator (physical progress bar)
+
+### Content Density
+MODERATE to HIGH — physical interfaces pack controls densely. Think of a mixing console or a car dashboard. Space is used efficiently, not generously.
+
+## Icons & Illustrations
+
+### Icon Style
+Detailed, rendered icons that look like miniature physical objects:
+- NOT flat line icons — skeuomorphic icons have depth, shadow, gradient, and material texture
+- The classic iOS 6 icon style: rounded-rectangle with gloss highlight, detailed rendering
+- Toolbar icons: Smaller, simpler, but still with subtle gradient/shadow treatment
+- Icons should match the material metaphor — a trash can looks like a real trash can, a gear looks like a real gear
+
+### Recommended Approach
+- Custom-designed icons matching the material palette of your interface
+- If using icon sets: Apple's SF Symbols (in their older, more detailed variants) or custom renders
+- Avoid: Flat line icons (Lucide, Heroicons) — they clash with the skeuomorphic depth. Filled icons can work but need gradient/shadow treatment.
+
+### Illustrations & Photography
+- Photography: Of the PHYSICAL OBJECTS being simulated — wood textures, leather textures, metal surfaces, fabric textures
+- Textures are critical: linen background tile, leather pattern, wood grain — these ARE the visual design
+- Illustrations: Minimal — the 3D-rendered UI elements serve as the visual art
+- The interface itself IS the illustration — each panel, button, and control is a miniature rendered object
+
+## Accessibility
+
+### Contrast
+- Gradient buttons: The lightest gradient point (#F7F7F7) against white backgrounds creates LOW contrast for button edges. Ensure text inside buttons is dark (#333) and meets 4.5:1.
+- Embossed text: The text-shadow adds visual complexity — ensure the BASE text color alone meets contrast requirements (the shadow is enhancement, not load-bearing).
+- Dark surfaces: Light text on dark leather/wood backgrounds — check specific textures. Busy textures reduce perceived contrast.
+- Inset input fields: Slightly darker background (#FAFAFA) with text (#333) — 12:1 contrast, excellent.
+
+### Focus States
+A subtle glow matching the iOS/macOS tradition:
+```css
+:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.5);
+  outline: none;
+  border-radius: inherit;
+}
+```
+
+### Motion
+- `prefers-reduced-motion`: Disable button spring animations, drawer slides, page curl effects
+- Keep: Instant button press state change (gradient reversal on click) — this is feedback, not decoration
+- The pressed state (inset shadow) is a critical affordance that helps users understand they clicked something — never remove it
+
+### Known Risks
+- **Material textures reduce readability**: Busy textures (wood grain, leather) behind text create visual noise. Keep text over the simplest texture areas, or add a semi-transparent overlay beneath text.
+- **Small UI elements**: Skeuomorphism's compact layout produces smaller touch targets than modern standards. Audit all interactive elements for 44px minimum on mobile.
+- **Gradient-based depth cues**: Users with low vision may not perceive subtle gradient differences between raised/recessed states. Ensure state changes also have size, position, or color shifts (not just shadow changes).
+- **Physical metaphors may be unfamiliar**: Younger users may not recognize a floppy disk (save), rotary phone (call), or film reel (video). Consider supplementing with text labels.
+- **Low contrast beveled edges**: The light-top/dark-bottom bevel technique creates edges that are only 10-20% different from the surface — usually too subtle for users with low vision to perceive. These edges are decorative, not functional.
+
+---
+
 ## Do's and Don'ts
 
 ### Do
@@ -176,11 +333,11 @@ Animation in Skeuomorphism is **physical and realistic**. Objects move as if the
 - Add embossed/debossed text effects
 
 ### Don't
-- Use flat, solid-color surfaces without texture (that's flat design)
-- Apply inconsistent lighting — if the light comes from the top-left on buttons, it must be top-left everywhere
+- Use flat, solid-color surfaces without texture — because material texture is what creates the illusion of physical reality; without it, you've removed the defining characteristic of skeuomorphism
+- Apply inconsistent lighting — because our brains are wired to detect lighting direction; if one button is lit from the left and another from above, the interface feels uncanny and untrustworthy
 - Over-texture to the point of visual noise — textures should be subtle
 - Mix too many materials on one screen (leather + wood + metal + felt = chaos)
-- Forget the pressed state on buttons — it's the defining interaction
+- Forget the pressed state on buttons — because the visual depression (gradient reversal + inset shadow) is skeuomorphism's most important interaction affordance; it tells users their click registered by simulating physical feedback
 - Use it for modern, minimal products — skeuomorphism communicates nostalgia and richness, not simplicity
 - Apply skeuomorphism to data-heavy interfaces — the visual weight overwhelms content
 

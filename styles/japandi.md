@@ -152,25 +152,101 @@ Animation in Japandi is **barely there** — like a leaf falling or water rippli
 - **Scroll**: No parallax. Content appears calmly as you scroll.
 - **Avoid**: Anything fast, bouncy, or attention-grabbing. The design should feel still.
 
+## Dark Mode & Light Mode
+
+Japandi is **light-first, strongly**. The warmth of the style comes from the cream/sand palette — dark mode risks losing this entirely. If dark mode is required, the warmth is NON-NEGOTIABLE. If the dark palette feels cold or tech-y, it's not Japandi.
+
+### Dark Mode Adaptation
+- **Base background**: Warm dark tones, NOT cool grays — use #1C1917, #292524 (stone-900/800)
+- **Card/surface**: Warm charcoal (#292524, #44403C) — must retain visible warm brown undertone
+- **Text**: Warm cream (#FAF8F5) for primary, warm gray (#A8A29E) for secondary
+- **Accents**: Sage, terracotta, and other accents stay the same — they anchor warmth in dark mode
+- **Borders**: Warm dark (#57534E) — never cool slate or zinc
+- **Shadows**: Nearly invisible — rely on warm borders for definition instead. Dark mode shadows disappear; structure comes from subtle border contrast.
+
+## Responsive & Mobile
+
+### Spacing Compression
+The extremely generous spacing (100-160px sections) compresses significantly on smaller viewports:
+- **Tablet**: 60-80px section padding
+- **Mobile**: 40-60px section padding
+
+### Typography Scaling
+- Large light-weight headings (40-64px) compress to **28-36px on mobile** but maintain Light weight (300) — the delicacy of weight is the identity, even at smaller sizes
+- Reading column (600-700px) naturally fits mobile without adjustment
+
+### Layout Adaptation
+- Asymmetric compositions become **single-column stacked** on mobile
+- Full-bleed images work beautifully on mobile — lean into them
+- Navigation: minimal — **logo + hamburger** with a warm, understated slide-out panel
+- Touch targets: **44px minimum**, but Japandi's comfortably padded buttons already meet this naturally
+
+## Content & Voice
+
+The voice is **contemplative, poetic, understated** — like a beautifully written Kinfolk article or Aesop product description.
+
+### Headlines
+Quiet and evocative. Examples: "The art of less", "Crafted with intention", "Find your calm". Headlines should feel like a whisper, not a shout.
+
+### Body Copy
+Thoughtful, unhurried, uses sensory language (texture, warmth, light, craft). Short paragraphs — **2-3 sentences max**. The silence between words matters as much as the words themselves (ma applied to content).
+
+### Calls to Action
+Invitational, never pushy: "Explore", "Discover", "Learn more". The user is invited, not commanded.
+
+### Microcopy & Errors
+Error messages are gentle. Microcopy is warm and human. Content density is **LOW** — lots of whitespace between text blocks.
+
+## Icons & Illustrations
+
+### Icon Style
+- Delicate, organic line icons at **1-1.5px stroke**
+- Warm dark gray, not black
+- Icons should feel hand-drawn or crafted, not geometric/industrial
+- Recommended sets: Phosphor (thin weight), or custom organic line icons
+
+### Illustration Approach
+Botanical line drawings, watercolor-style washes, natural textures. Illustrations should feel like they belong in a craft studio, not a tech company.
+
+### Photography
+Photography is **CRITICAL** in Japandi — it carries the material warmth that digital interfaces can't:
+- Warm natural light, wooden textures, ceramic, linen, dried flowers, handmade objects, quiet interiors
+- Muted/desaturated color treatment — no high-contrast or heavily saturated processing
+- Unsplash keywords: "japandi", "wabi sabi", "kinfolk aesthetic"
+
+## Accessibility
+
+### Known Risks
+The warm, low-contrast palette is the biggest accessibility concern:
+- Warm charcoal (#2C2825) on warm cream (#FAF8F5) gives approximately **10:1 contrast** (good)
+- Secondary text (#7D756D) on cream gives approximately **4.2:1** — borderline for WCAG AA body text. Darken to **#6D655D** for safety.
+- Light font weights (300) on headings require larger sizes (**24px+**) to maintain readability
+
+### Remediation
+- **Never use Light weight (300) below 24px** — switch to Regular (400) for smaller text
+- **Focus states**: Warm accent-colored outline (sage or terracotta) with offset — visible but not jarring
+- **prefers-reduced-motion**: Japandi animations are already so subtle they're likely safe, but disable fade-in-on-scroll for thoroughness
+- **prefers-contrast**: Have a higher-contrast variant ready that darkens secondary text and strengthens borders
+
 ## Do's and Don'ts
 
 ### Do
-- Use warm, earthy neutrals for the base palette (sand, cream, clay, charcoal)
-- Mix serif headings with sans-serif body text
-- Use generous whitespace — let the design breathe
-- Include imagery of natural materials and textures
-- Create asymmetric but balanced compositions
-- Let the typography be light in weight but large in size
-- Make every element feel intentional and cared-for
+- Use warm, earthy neutrals for the base palette (sand, cream, clay, charcoal) — *the warm undertone is what separates Japandi from generic minimalism*
+- Mix serif headings with sans-serif body text — *this creates the refined, editorial quality that pure sans-serif misses*
+- Use generous whitespace — let the design breathe — *whitespace is an active design element (ma), not empty space*
+- Include imagery of natural materials and textures — *photography of wood, ceramic, and linen carries the tactile warmth that code alone cannot*
+- Create asymmetric but balanced compositions — *symmetry feels rigid and corporate; asymmetry feels human and curated*
+- Let the typography be light in weight but large in size — *the contrast of delicate weight at generous scale is a core Japandi signature*
+- Make every element feel intentional and cared-for — *Japandi is the opposite of "throw it together" — each element earns its place*
 
 ### Don't
-- Use cool grays, pure white, or pure black
-- Use bold/heavy font weights for headings (Light to Regular is Japandi)
-- Center everything — asymmetric balance is more characteristic
-- Add decorative borders, shadows, or effects
-- Use saturated, bright accent colors — everything should be muted and natural
-- Rush the spacing — Japandi needs generous room to breathe
-- Make it sterile — Japandi is warm minimalism, not cold minimalism
+- Use cool grays, pure white, or pure black — *cool tones immediately break the warm natural atmosphere and make it feel like tech minimalism*
+- Use bold/heavy font weights for headings (Light to Regular is Japandi) — *heavy weights feel industrial and forceful, the opposite of Japandi's quiet refinement*
+- Center everything — asymmetric balance is more characteristic — *centered layouts feel static and expected; Japandi compositions have quiet visual tension*
+- Add decorative borders, shadows, or effects — *ornamentation contradicts the "less but better" principle; let whitespace and warmth do the work*
+- Use saturated, bright accent colors — everything should be muted and natural — *bright colors feel synthetic; Japandi accents reference nature (sage, clay, stone)*
+- Rush the spacing — Japandi needs generous room to breathe — *cramped layouts feel anxious; Japandi's calm comes directly from generous, unhurried spacing*
+- Make it sterile — Japandi is warm minimalism, not cold minimalism — *if it could be mistaken for a hospital or bank interface, the warmth is missing*
 
 ## Implementation Hints (Tailwind + CSS)
 

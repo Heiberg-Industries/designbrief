@@ -143,6 +143,26 @@ Swiss design is **static**. Movement, if present, is purely functional: a page l
 - **Scroll**: No parallax, no reveal animations. Content is simply there.
 - **Avoid**: ALL decorative animation. Swiss design has no time for frivolity.
 
+## Dark Mode & Light Mode
+
+Light-first (white paper is the Swiss tradition). Dark mode: near-black base (#0A0A0A), white text. The ONE accent color stays bold. Thick rules/lines shift from black to white. Grid structure is maintained perfectly. No shadows in either mode. Section numbers/labels in white/10-20% opacity. Swiss dark mode is STRIKING — the bold typography and strict grid become even more powerful on black.
+
+## Responsive & Mobile
+
+Grid must remain strict at all sizes. Extreme size contrast (72-120px headings) compresses to 36-56px mobile. The grid: 12-col → 6-col → 4-col. Thick rules/dividers stay. Left alignment stays (never center on mobile). Section padding: 80-120px → 48-72px. Touch targets: ensure buttons with 0px radius have at least 44px tap area. Typography remains the hero on mobile.
+
+## Content & Voice
+
+Objective, authoritative, information-dense. Like a quality newspaper or government communication. Headlines are declarative facts, not marketing ("Annual Report 2025", "Product Specifications", "Usage Guidelines"). Body copy is factual, clear, well-structured. CTAs are direct: "Read", "View", "Download". No marketing language, no emotion, no personality. Content density: HIGH — Swiss design excels with information-rich layouts. Numbers and data are first-class citizens.
+
+## Icons & Illustrations
+
+Minimal to none. Typography carries all visual weight. If icons must be used: simple, geometric, single-weight line icons. Never decorative. Photography: documentary-style, high-contrast B&W or factual color. Positioned precisely within the grid (never free-floating). Illustration: geometric diagrams, data visualizations, infographics — never decorative art. Charts and graphs are natural Swiss elements.
+
+## Accessibility
+
+Known strengths: extreme contrast (black on white), large typography, clear hierarchy, structured grid. Known risk: ALL CAPS + tight tracking reduces readability at length. Use ALL CAPS only for short labels. Pure black (#000) on white (#FFF) is technically high contrast but can cause eye strain for some — consider #1A1A1A. Focus states: thick accent-colored rule/underline. prefers-reduced-motion: Swiss barely uses animation — likely no changes needed.
+
 ## Do's and Don'ts
 
 ### Do

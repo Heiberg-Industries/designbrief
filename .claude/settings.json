@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Task",
+      "Glob",
+      "Grep",
+      "Read",
+      "Edit",
+      "Write",
+      "WebFetch",
+      "WebSearch",
+      "TodoWrite",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Write(.env)",
+      "Write(.env.*)",
+      "Read(secrets/**)",
+      "Write(secrets/**)",
+      "Bash(git push --force *)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -f *)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if source code files were modified in this session (look for Edit/Write tool uses on files like .ts, .tsx, .js, .jsx, .py, .go, .rs, .java, .css, .sql — NOT .md documentation files). If source code was modified but no verification command was run (build, typecheck, test, lint), respond with {\"ok\": false, \"reason\": \"Source code was modified but not verified. Run the project's build/typecheck command before finishing.\"}. If only documentation/config was modified, or code was verified, or no files were modified, respond with {\"ok\": true}."
+          }
+        ]
+      }
+    ]
+  }
+}

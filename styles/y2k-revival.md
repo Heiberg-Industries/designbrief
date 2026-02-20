@@ -199,6 +199,178 @@ Animation in Y2K is **glossy, smooth, and slightly over-the-top**. Things SHIMME
 - **Transitions**: 200-350ms, ease-out. Smooth and polished.
 - **Sparkle**: Occasional sparkle/glint effect on chrome surfaces (a brief white flash)
 
+## Dark Mode & Light Mode
+
+Y2K Revival works in **both modes**, but each creates a distinctly different Y2K sub-mood.
+
+### Light Mode (Bubbly Y2K — Default)
+The more common Y2K variant — pop-star album covers, iMac ads, Aqua interface:
+- Background: Silver/lavender gradient (#E8E8F0 → #D0D0E0) or near-white
+- Cards: White or white at 90% opacity with glossy highlights
+- Chrome elements: Full metallic gradient (light → dark → light)
+- Text: Dark navy (#1A1A2E) or near-black
+- Accents: Baby blue, hot pink, lavender at full saturation
+- The glossy highlight effects (white-to-transparent gradient overlay) are most visible in light mode
+
+### Dark Mode (Matrix Y2K)
+The darker, more tech-oriented side — The Matrix, early 2000s hacker culture:
+- Background: Near-black (#111111, #0A0A1A) or deep navy (#1A1A2E)
+- Cards: Dark glass (rgba white at 5-10%) with chrome-gradient borders
+- Chrome elements: Same metallic gradient, but reads as more dramatic on dark backgrounds
+- Text: White or silver (#D4D4D8)
+- Accents: Neon blue (#00BFFF), hot pink (#FF1493) — brighter versions that glow against dark
+- Add subtle glow effects (box-shadow with accent color) — the dark background lets them shine
+- Iridescent elements become more dramatic and rainbow-like
+
+### CSS Custom Properties
+```css
+:root {
+  --y2k-bg: #E8E8F0;
+  --y2k-surface: rgba(255, 255, 255, 0.9);
+  --y2k-text: #1A1A2E;
+  --y2k-chrome-light: #F0F0F0;
+  --y2k-chrome-mid: #B0B0B0;
+  --y2k-chrome-dark: #808080;
+  --y2k-blue: #0EA5E9;
+  --y2k-pink: #EC4899;
+  --y2k-lavender: #DDA0DD;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --y2k-bg: #0A0A1A;
+    --y2k-surface: rgba(255, 255, 255, 0.05);
+    --y2k-text: #E4E4E7;
+    --y2k-blue: #00BFFF;
+    --y2k-pink: #FF69B4;
+  }
+}
+```
+
+## Responsive & Mobile
+
+### Typography Scaling
+- Chrome headings: Desktop 56-80px → Tablet 40-56px → Mobile 32-44px
+- Body: 14-16px across breakpoints
+- ALL CAPS letter-spacing: Reduce slightly on mobile (+0.03em → +0.02em)
+
+### Spacing Adaptation
+- Section padding: Desktop 80-100px → Tablet 60px → Mobile 40px
+- Card padding: Desktop 24-32px → Mobile 16-20px
+- Card grids: 3-col → 2-col → 1-col
+
+### Layout Behavior
+- Chrome orbs and decorative elements: Reduce COUNT on mobile (4 orbs → 2), reduce size
+- Iridescent backgrounds: Use simpler gradients on mobile (3 stops instead of 7)
+- Glossy card overlays (::before with glass highlight): Keep — lightweight CSS, works on all devices
+- Centered, hero-driven layout adapts naturally to mobile
+
+### Touch Targets
+- Glossy pill buttons: Already generous (pill shape, 12px+ padding) — naturally touch-friendly
+- Chrome orbs that are clickable: Ensure 44px minimum diameter
+
+### Performance
+- **Chrome gradients** (multi-stop linear gradients): Lightweight — no concern
+- **Radial gradients for chrome orbs**: Minimal impact
+- **Iridescent gradient animation** (background-position shifting): Safe at 8s+ cycle times
+- **Glossy card ::before overlay**: Simple gradient pseudo-element — negligible impact
+- **Multiple box-shadows** (inset gloss + outer glow): Moderate — simplify to 1-2 layers on mobile if many cards
+- Y2K is generally PERFORMANCE-FRIENDLY — its effects are CSS gradients, not blur or backdrop-filter
+
+## Content & Voice
+
+### Headline Tone
+Playful, bubbly, and optimistic — the voice of pop culture at the millennium:
+- "SO Fresh", "Totally Connected", "Digital Dreams"
+- "Welcome to the Future", "Ready. Set. Go."
+- Can use playful formatting: asterisks (*sparkle*), tildes (~vibes~)
+- ALL CAPS for impact, mixed case for playfulness
+
+### Body Copy
+Casual, upbeat, and youth-oriented:
+- Short, punchy sentences
+- Exclamation marks are welcome (unlike most styles)
+- Pop-culture references and optimistic tech language
+- "Connect with friends!", "Discover what's new!", "Your digital playground"
+
+### CTAs
+Energetic and action-oriented:
+- "Let's Go!", "Enter", "Join Now", "Get In"
+- Can be playful: "Click Me!", "Take Me There"
+- Short — one to three words
+- The glossy button design does the heavy lifting; the text can be simple
+
+### Microcopy
+Fun and lighthearted:
+- Error: "Oops! Something went wrong. Try again?"
+- Empty state: "Nothing here yet! Start exploring."
+- Loading: "Loading..." with an animated chrome spinner or progress bar
+
+### Content Density
+MODERATE — Y2K interfaces weren't sparse, but they weren't information-dense either. The decorative elements (chrome orbs, glossy surfaces, iridescent backgrounds) take up visual space, leaving moderate room for content.
+
+## Icons & Illustrations
+
+### Icon Style
+Glossy, rounded, and 3D-rendered — matching the bubbly Y2K aesthetic:
+- Icons should look like miniature glossy objects — rounded, with gradient fill and highlight
+- 3D rendered icons are ideal (think: macOS Aqua-era icons, early iOS)
+- If using flat icon sets: Choose the FILLED variant and add a glossy gradient overlay
+- Rounded icon shapes: circles, rounded squares, pill shapes
+
+### Recommended Approach
+- Custom icons with gradient fills and glossy highlights
+- If using sets: Phosphor Icons (fill weight) — apply glossy treatment via CSS
+- 3D rendered icon packs or emoji-style icons
+- Avoid: Thin line icons (too minimal), sharp geometric icons (too angular)
+
+### Illustrations & Photography
+- Photography: Bright, saturated, pop-culture energy. Think: product shots on chrome backgrounds, people in futuristic outfits
+- Color treatment: High saturation, slight blur/glow, pink/blue tint
+- 3D renders: Chrome spheres, metallic objects, iridescent surfaces — VERY Y2K
+- CD-ROM / disc imagery: Circular rainbow-gradient elements referencing disc iridescence
+
+### Decorative Elements (Essential)
+- Chrome orbs (radial gradient spheres)
+- Star sparkles (4-pointed star shapes in white/silver)
+- Bubble shapes (translucent circles with glossy highlights)
+- Iridescent disc shapes (rainbow gradients in circles)
+- These decorations are ESSENTIAL — they create the Y2K atmosphere
+
+## Accessibility
+
+### Contrast
+- **Chrome gradient text**: The metallic gradient ranges from very light (#F5F5F5) to medium (#808080). On light backgrounds, the lightest parts FAIL contrast. Solutions:
+  - Use chrome text only on dark backgrounds where even the lightest chrome color meets 4.5:1
+  - Add a dark text-shadow behind chrome text for safety: `filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3))`
+  - Provide a solid-color fallback for the `color` property
+- **Hot pink (#EC4899) on white**: ~3.5:1 — FAILS for small text. Darken to #DB2777 (4.6:1) for body text.
+- **Baby blue (#7DD3FC) on white**: ~2.5:1 — FAILS. Use only on dark backgrounds or as decoration, not text.
+- **Dark mode**: Silver/white text on dark backgrounds — generally excellent contrast.
+
+### Focus States
+Glossy, matching the bubbly aesthetic:
+```css
+:focus-visible {
+  outline: 2px solid var(--y2k-blue, #0EA5E9);
+  outline-offset: 3px;
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.4);
+  border-radius: inherit;
+}
+```
+The glow focus ring harmonizes with Y2K's glowing, glossy aesthetic.
+
+### Motion
+- `prefers-reduced-motion`: Disable iridescent gradient shifts, floating chrome orbs, sparkle animations, shimmer effects
+- Keep: Static chrome gradients, glossy highlights (::before overlay), static iridescent backgrounds
+- The style remains fully recognizable without animation — chrome, gloss, and color palette carry the identity
+
+### Known Risks
+- **Chrome gradient text readability**: The multi-stop metallic gradient creates variable contrast across the text — some characters may be hard to read. Always add a drop-shadow and test at the gradient's lightest point.
+- **Glossy card overlay** (::before with white gradient): Reduces contrast of content beneath it by adding a white layer. Ensure the overlay is limited to the top 50% and doesn't cover text.
+- **Candy-bright colors on white**: Baby blue, lavender, and light pink are all LOW contrast on white. Reserve these for decorative elements, not text.
+- **Chrome orbs and decorative sparkles**: All decorative — mark as `aria-hidden="true"`.
+- **Iridescent animations**: Slowly shifting colors can be disorienting for some users. Respect `prefers-reduced-motion`.
+
 ## Do's and Don'ts
 
 ### Do
@@ -211,12 +383,12 @@ Animation in Y2K is **glossy, smooth, and slightly over-the-top**. Things SHIMME
 - Generous border-radius on everything (16px+ or pill)
 
 ### Don't
-- Use matte, flat surfaces (everything should have SHINE)
-- Skip the metallic/chrome element — it's the single most Y2K visual marker
+- Use matte, flat surfaces — because Y2K's entire visual language is built on SHINE; the glossy highlight, the chrome reflection, the iridescent sheen all simulate the physical materials (CDs, translucent plastic, polished metal) that defined the era's product design
+- Skip the metallic/chrome element — because chrome is THE defining visual signature of Y2K; without it, the design reads as "glossy modern" not Y2K Revival, and loses its era-specific identity
 - Use dark, moody colors without metallic contrast (that's Dark Mode, not Y2K)
 - Over-complicate the layout — Y2K decoration goes ON a clean structure
 - Use sharp corners (0px radius) — Y2K is rounded, bubbly, organic
-- Make text unreadable over chrome/metallic backgrounds — contrast matters
+- Make text unreadable over chrome/metallic backgrounds — because the multi-stop gradients create variable contrast that can make some letters invisible; always add a drop-shadow safety net
 - Forget the decorative elements — chrome orbs and sparkles make it Y2K, not just "shiny"
 
 ## Implementation Hints (Tailwind + CSS)

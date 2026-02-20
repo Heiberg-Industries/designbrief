@@ -175,6 +175,294 @@ Animation in Claymorphism is **bouncy, soft, and playful** — like poking a blo
 - **Transitions**: 200-350ms with spring easing.
 - **Avoid**: Linear timing, sharp movements, anything mechanical or stiff.
 
+## Dark Mode & Light Mode
+
+### Mode Preference
+Claymorphism is **strongly light-first**. The entire aesthetic — pastel surfaces, white inner highlights, soft outer shadows — is engineered around light bouncing off a pale, well-lit surface. The pastel palette that makes Claymorphism feel like a box of modeling clay loses its charm against dark backgrounds. That said, dark mode is absolutely possible — it just requires more deliberate work to preserve the puffy, tactile illusion.
+
+### Why Light Mode Works Naturally
+The dual-shadow system depends on contrast: the white inner highlight (simulating light hitting the top of a rounded surface) reads clearly against pastel fills, and the soft outer shadow (simulating the object resting on a surface) reads clearly against a light background. In light mode, you get this "3D clay" effect almost for free.
+
+### Dark Mode Adaptation
+Dark mode Claymorphism shifts from "pastel clay in sunlight" to "pastel clay under soft lamplight." The key is using **deep, muted pastels** — not pure dark grays — as your card surfaces, sitting on a very dark (but not pure black) base.
+
+- **Background**: Very dark with a hint of color — not pure black.
+  - Dark lavender base: `#1A1A2A`
+  - Dark blue-gray: `#1C1C30`
+- **Card surfaces**: Deep, muted pastels that still carry a hue:
+  - Dark lavender card: `#2A2040`
+  - Dark mint card: `#1A3028`
+  - Dark blush card: `#2E1F28`
+  - Dark sky card: `#1A2838`
+- **Text**: Light warm gray `#E8E4F0` for primary, muted `#9A95A8` for secondary
+- **Inner highlight**: This becomes MORE critical in dark mode — it's the primary cue that sells the 3D illusion. Increase the opacity slightly:
+  ```css
+  /* Dark mode inner highlight — boosted to cut through darkness */
+  inset 0 4px 8px rgba(255, 255, 255, 0.15);
+  ```
+- **Outer shadow**: Shifts to subtler rgba with slightly more opacity (shadows on dark backgrounds need more strength to register):
+  ```css
+  /* Dark mode outer shadow */
+  0 8px 20px rgba(0, 0, 0, 0.3);
+  ```
+- **Borders**: In dark mode, thin borders become useful for defining card edges that shadows alone can't delineate. Use white at very low opacity:
+  ```css
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  ```
+
+### Implementation
+```css
+/* Dark mode clay card */
+@media (prefers-color-scheme: dark) {
+  .clay-card {
+    background: linear-gradient(145deg, #2E2548 0%, #2A2040 100%);
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.3),
+      0 2px 6px rgba(0, 0, 0, 0.15),
+      inset 0 -2px 6px rgba(0, 0, 0, 0.12),
+      inset 0 4px 8px rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+```
+
+```
+/* Tailwind dark mode clay card */
+dark:bg-gradient-to-br dark:from-[#2E2548] dark:to-[#2A2040]
+dark:shadow-[0_8px_20px_rgba(0,0,0,0.3),0_2px_6px_rgba(0,0,0,0.15),inset_0_-2px_6px_rgba(0,0,0,0.12),inset_0_4px_8px_rgba(255,255,255,0.15)]
+dark:border dark:border-white/[0.08]
+dark:text-[#E8E4F0]
+```
+
+### Guidance
+Light mode is the recommended primary experience — it's where Claymorphism truly shines and the puffy illusion is most convincing. Dark mode works as a secondary option, but expect to spend more time tuning. The "puffy" feeling is harder to achieve in darkness; lean heavily on the inner highlight to carry the 3D illusion. Test your dark mode cards against the dark background — if the edges disappear, add the thin border.
+
+## Responsive & Mobile
+
+### Breakpoint Strategy
+Claymorphism's simple, card-centric layouts are naturally mobile-friendly. The style uses 1-3 column grids that collapse gracefully. The main challenge isn't layout — it's that the generous spacing and complex multi-layer shadows need thoughtful adaptation on smaller screens.
+
+### Typography Scaling
+Typography scales down gently — the rounded, friendly fonts remain legible at smaller sizes:
+- **Headings**: Desktop 28px-48px → Tablet 24px-36px → Mobile 22px-32px
+- **Body**: Desktop 15px-17px → Mobile 15px-16px (barely changes — readability is paramount)
+- **Line-height**: Stays at 1.6-1.8 across breakpoints. Don't tighten it — the generous spacing IS the style.
+- **Font weight**: Remains the same. Don't thin out headings on mobile.
+
+### Spacing Adaptation
+The generous spacing (28-40px padding, 80-120px sections) needs significant compression for mobile, but should still feel "roomy" compared to typical mobile UI:
+- **Section padding**: Desktop 80px-120px → Tablet 48px-64px → Mobile 32px-48px
+- **Card padding**: Desktop 28px-40px → Tablet 24px-32px → Mobile 20px-24px
+- **Between elements**: Desktop 24px-40px → Mobile 16px-24px
+- **Gaps between cards**: Desktop 24px-32px → Mobile 16px-20px
+
+```css
+/* Responsive spacing scale */
+.clay-section {
+  padding: 96px 24px;    /* Desktop */
+}
+@media (max-width: 768px) {
+  .clay-section {
+    padding: 40px 16px;  /* Mobile — still generous */
+  }
+}
+```
+
+### Layout Collapse
+- **Grid strategy**: 3-col → 2-col at 768px → 1-col at 480px. Cards stack naturally.
+- **Component stacking**: Illustration/icon on top, heading, then body text. The centered compositions common in Claymorphism translate perfectly to single-column mobile.
+- **Navigation**: Bottom tab bar or hamburger both work well. Apply the clay treatment to the nav bar itself — puffy, rounded, with the inner highlight.
+
+### Touch & Performance
+- **Touch targets**: Already generous due to the puffy padding style. Buttons with 14px 28px padding and large border-radius exceed the 44px minimum easily.
+- **Border-radius**: Stays generous on mobile. Don't reduce it — the rounding IS the style.
+- **Performance concern — shadows**: The complex 4-layer `box-shadow` system is the main performance consideration on mobile. Each layer requires compositing, and when many clay cards are on screen simultaneously, this adds up. Consider simplifying to a 2-layer shadow on mobile (just inner highlight + outer shadow, dropping the intermediate layers):
+
+```css
+/* Mobile-optimized clay shadow — 2 layers instead of 4 */
+@media (max-width: 768px) {
+  .clay-card {
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.1),
+      inset 0 4px 6px rgba(255, 255, 255, 0.5);
+  }
+}
+```
+
+```
+/* Tailwind mobile-simplified shadow */
+shadow-[0_8px_20px_rgba(0,0,0,0.1),inset_0_4px_6px_rgba(255,255,255,0.5)]
+md:shadow-[0_8px_20px_rgba(0,0,0,0.08),0_2px_6px_rgba(0,0,0,0.04),inset_0_-2px_6px_rgba(0,0,0,0.04),inset_0_4px_8px_rgba(255,255,255,0.6)]
+```
+
+The 2-layer version still reads as "clay" — the inner highlight + outer shadow pairing is the minimum viable clay effect. You lose a bit of depth from the intermediate layers, but the puffy illusion holds.
+
+## Content & Voice
+
+### Headline Tone
+Warm, friendly, and encouraging — like a patient teacher or a kind friend cheering you on. Headlines use simple, positive language with a conversational spark. Think of how you'd talk to someone you genuinely want to help.
+
+- "Let's get started!"
+- "You're doing great!"
+- "Simple & friendly"
+- "Your creative space"
+- "Ready when you are"
+
+### Body Copy
+Conversational, approachable, and jargon-free. Claymorphism's visual warmth should be matched by writing that feels like a friend explaining something, not a manual instructing you. Use "you" and "we" generously — the voice is personal and direct.
+
+- **Sentence length**: Short. One idea per sentence. Let the words breathe like the generous spacing breathes.
+- **Reading level**: Aim for a 6th-8th grade reading level. If a simpler word works, use it.
+- **Tone**: Encouraging, never condescending. Positive, never anxious. Patient, never terse.
+- **Personality**: A little playful, a little warm. Emojis are welcome and feel right at home in this style.
+- **Avoid**: Technical jargon, corporate buzzwords, ALL CAPS urgency, fear-based messaging, complex sentences.
+
+### CTAs & Microcopy
+- **Button labels**: Invitational, not commanding. Use "let's" and friendly action words:
+  - "Try it out" / "Let's go" / "Start creating" / "Sounds good!"
+  - Avoid: "Submit" / "Execute" / "Proceed" / "Continue"
+- **Error messages**: Reassuring and blame-free. The user should never feel bad:
+  - "No worries! Let's try that again."
+  - "Hmm, something went off track. Let's fix it together."
+  - "Oops! That didn't work, but we've got this."
+- **Empty states**: Encouraging and action-oriented. The emptiness should feel like an invitation, not a void:
+  - "Nothing here yet — let's change that!"
+  - "This is where your creations will live. Ready to make your first one?"
+- **Tooltips & helpers**: Gentle and helpful, like a friend whispering a tip:
+  - "Psst — you can drag these around!"
+  - "This is where your files will show up."
+
+### Content Density
+Less is more. Claymorphism's generous padding and puffy elements already take up visual space, so text should be concise. Favor a high visual-to-text ratio: short paragraphs (2-3 sentences), plenty of illustrations or icons, and lots of breathing room. If a section feels text-heavy, break it into smaller cards.
+
+## Icons & Illustrations
+
+### Icon Style
+Icons in Claymorphism should feel as soft and rounded as everything else. Sharp, thin-line icons feel jarring against puffy clay surfaces.
+
+- **Ideal**: 3D-rendered icons are the gold standard. They match the clay aesthetic perfectly — rounded, shaded, tactile. Tools like Blender, Cinema 4D, or Spline can produce these, and many icon packs offer pre-made 3D sets.
+- **2D alternative**: If using flat 2D icons (Lucide, Phosphor, etc.), place them inside puffy rounded containers with the full clay treatment. The container does the heavy lifting of making the icon feel "claymorphic":
+  ```css
+  /* Clay icon container */
+  .clay-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #E8DEFF 0%, #D0C0FF 100%);
+    box-shadow:
+      0 6px 14px rgba(0, 0, 0, 0.08),
+      inset 0 3px 6px rgba(255, 255, 255, 0.5);
+  }
+  ```
+- **Weight**: Medium weight (not thin, not heavy). Thin-line icons disappear against the soft surfaces; heavy icons feel clunky.
+- **Style**: Rounded joins and caps, never sharp. If your icon set offers a "rounded" variant, use it.
+- **Size in containers**: Icons should fill about 55-65% of their clay container, leaving room for the puffy padding to breathe.
+- **Color**: Icons should use the warm dark text color (`#2D2D3F`) or a slightly deeper pastel that matches their container. Avoid black icons — they're too harsh.
+
+### Illustration Approach
+Illustrations are a natural companion to Claymorphism and can elevate it dramatically.
+
+- **3D illustrations**: The absolute gold standard. Soft-body 3D renders in pastel colors from Blender, Cinema 4D, or Spline. Think rounded, blobby shapes with soft lighting — like the characters and objects you see in modern tech marketing. These should match the pastel palette: lavender blobs, mint orbs, pink bubbles.
+- **Flat vector illustrations**: Can work if the colors match the pastel palette and the style is rounded and friendly. Avoid sharp geometric vectors — they clash with the organic clay mood. Illustration packs like Humaaans, Open Peeps, or unDraw work if recolored to match.
+- **Isometric**: Generally too structured and angular for Claymorphism. Skip it.
+- **Hand-drawn**: Loose, rounded hand-drawn doodles can complement the style if they feel playful and warm. Avoid precise, architectural hand-drawing.
+
+### Photography Direction
+Photography is rarely the right choice for Claymorphism — the style strongly prefers illustration. The entire aesthetic is about a crafted, playful, slightly unreal world, and photography introduces too much "reality."
+
+If photography must be used:
+- **Warm, soft-focus**: Gentle depth of field, warm color grading
+- **Human-centered**: Smiling faces, hands creating things, cozy environments
+- **Treatment**: Apply a subtle pastel overlay or duotone wash so photos feel part of the clay world. Round the corners generously (16px-24px) and apply the clay shadow to the photo container.
+- **Avoid**: Sharp, high-contrast photography, corporate stock photos, product shots with harsh lighting
+
+### Recommended Sources
+- **3D icons**: 3Dicons, Iconscout 3D, Handz 3D
+- **3D illustrations**: Kukla, Handz, Open Peeps 3D, Spline community library
+- **2D icons (in clay containers)**: Phosphor (rounded set), Lucide, Feather
+- **Flat illustrations**: unDraw (recolored to pastels), Humaaans, Blush
+
+## Accessibility
+
+### Contrast & Readability
+Claymorphism has specific accessibility risks that come with the territory. The soft, pastel aesthetic can easily drift into insufficient contrast if you're not careful.
+
+- **Known risk — inner shadow contrast**: The subtle inner shadow that creates the "lit" top area of a clay card can reduce the perceived contrast between text and the card surface. The lighter top zone (from the white inner highlight) may wash out text that sits near the top edge of a card.
+- **Known risk — pastel-on-pastel**: This is the biggest danger. Combinations like lavender text on a pink card, or mint text on a blue surface, will almost certainly fail WCAG contrast requirements. Pastel colors are by definition low-saturation and mid-to-high lightness — two pastels together rarely achieve the 4.5:1 ratio needed for body text.
+- **Remediation**: Always use warm dark gray text (`#2D2D3F` or `#3B3B4F`) on pastel surfaces. Never use pastel-colored text on pastel-colored backgrounds. The dark gray on pastel combination consistently achieves 7:1+ contrast while preserving the friendly mood. For secondary text, `#7A7A8E` on light pastels like `#F0EBFF` typically achieves 4.5:1 — verify with a contrast checker.
+- **Positive aspects**: The generous border-radius and ample padding are accessibility-friendly. Large touch targets, readable font sizes (15px-17px body), and generous line-height (1.6-1.8) all support readability.
+
+### Focus States
+Focus indicators should feel like they belong in the clay world — thick, rounded, and accent-colored, wrapping around the puffy element like a soft ring.
+
+```css
+/* Clay-friendly focus state */
+.clay-card:focus-visible,
+.clay-button:focus-visible {
+  outline: 3px solid #8B6FFF;
+  outline-offset: 3px;
+  border-radius: 24px; /* Match the element's radius */
+}
+
+/* Or as an additional shadow layer */
+.clay-button:focus-visible {
+  box-shadow:
+    0 0 0 3px #F0EBFF,              /* gap ring in background color */
+    0 0 0 6px #8B6FFF,              /* accent focus ring */
+    0 6px 16px rgba(139, 111, 255, 0.3),
+    inset 0 3px 6px rgba(255, 255, 255, 0.35);
+}
+```
+
+```
+/* Tailwind focus state */
+focus-visible:outline-3 focus-visible:outline-[#8B6FFF] focus-visible:outline-offset-2
+/* Or with ring utilities */
+focus-visible:ring-3 focus-visible:ring-[#8B6FFF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F0EBFF]
+```
+
+The key: the focus ring should be clearly visible (3px thick, strong accent color) but still rounded and soft. Avoid harsh square outlines — they break the clay illusion.
+
+### Motion Sensitivity
+Claymorphism's bouncy, spring-like animations are delightful for most users but can cause discomfort for users with vestibular sensitivity. Respect `prefers-reduced-motion`:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* Disable bouncy spring animations entirely */
+  .clay-card,
+  .clay-button {
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+    /* Remove transform-based transitions (translateY, scale, bounce) */
+    animation: none;
+  }
+
+  /* Keep simple, non-motion transitions */
+  .clay-button:hover {
+    transform: none;                /* No lift effect */
+    box-shadow:                     /* Shadow deepens without movement */
+      0 10px 24px rgba(139, 111, 255, 0.35),
+      inset 0 3px 6px rgba(255, 255, 255, 0.4);
+  }
+
+  /* Entrance animations become simple fades */
+  .clay-entrance {
+    animation: none;
+    opacity: 1;
+  }
+}
+```
+
+What to disable: bouncy entrances (scale + bounce), hover lift (translateY), press squish (scaleY), wobble effects, spring easing overshoot. What to keep: simple opacity transitions, color changes, shadow depth changes — anything that doesn't involve spatial movement.
+
+### Screen Reader Considerations
+- **Decorative shadows and highlights**: The multi-layer `box-shadow` system is purely visual and CSS-based, so it doesn't affect screen readers. No action needed.
+- **3D illustrations and icons**: All decorative 3D illustrations should have `aria-hidden="true"` if they don't convey meaningful content. If they do convey meaning (e.g., an icon representing a feature), ensure proper `alt` text or `aria-label`.
+- **Icon containers**: When 2D icons are wrapped in clay containers, the container is decorative — only the icon itself needs accessible labeling.
+- **Emoji in copy**: Emojis in headlines or body text are read aloud by screen readers. Use them deliberately and ensure the surrounding text makes sense without them.
+
 ## Do's and Don'ts
 
 ### Do

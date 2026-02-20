@@ -132,25 +132,210 @@ Movement in Bauhaus is **mechanical and precise** — like a well-made machine. 
 - **Hover effects**: Color shift, underline slide-in, or subtle scale (1.02 max)
 - **Avoid**: Elastic easing, wobbly animations, parallax scroll effects, decorative particle effects
 
+## Dark Mode & Light Mode
+
+### Philosophy
+Bauhaus is **light-first by heritage** — the white or off-white canvas is the traditional ground, echoing the stark white walls of the Dessau Bauhaus building. Dark mode is a modern adaptation that, when done correctly, makes the geometric accent shapes even more striking.
+
+### Light Mode (Default)
+- **Canvas**: White (#FFFFFF) or warm off-white (#FAFAF8–#F5F5F0)
+- **Text**: Near-black (#1A1A1A) for body, true black (#0D0D0D) for headings
+- **Borders**: 1–3px solid black
+- **Accent shapes**: Primary triad colors (red/blue/yellow) on the white ground
+- **Shadows**: None. Zero. Non-negotiable in either mode.
+
+### Dark Mode
+- **Canvas**: Near-black (#0D0D0D–#1A1A1A). Not charcoal gray — go dark enough to feel absolute.
+- **Text**: Off-white (#F5F5F0–#FAFAFA), never pure #FFFFFF (too harsh for extended reading)
+- **Primary accent**: Retains its hue but brightness/saturation increases slightly to maintain vibrancy against the dark canvas. Example: Bauhaus red shifts from #E63B2E → #EF4F43; blue from #1B4D8E → #2A6ABF; yellow from #F2C41D → #F5D04A.
+- **Borders**: Shift from black to white (1–3px solid white). The structural line language stays identical — only the color inverts.
+- **Geometric accent shapes**: Become the visual heroes. A red circle on near-black reads louder than on white — lean into this.
+- **Shadows**: Still none. The flat, solid-color-only rule applies identically to dark mode. No gradients to fake depth, no glow effects to simulate light.
+
+### Example: Card in Light vs. Dark
+```
+/* Light mode card */
+background: #FAFAF8;
+border: 2px solid #1A1A1A;
+color: #1A1A1A;
+box-shadow: none;
+border-radius: 0px;
+
+/* Dark mode card */
+background: #1A1A1A;
+border: 2px solid #F5F5F0;
+color: #F5F5F0;
+box-shadow: none;
+border-radius: 0px;
+```
+
+### Example: Primary Button in Light vs. Dark
+```
+/* Light mode */
+background: #E63B2E;
+color: #FFFFFF;
+border: none;
+border-radius: 0px;
+
+/* Dark mode */
+background: #EF4F43;
+color: #0D0D0D;
+border: none;
+border-radius: 0px;
+```
+
+## Responsive & Mobile
+
+### Philosophy
+Grid discipline is non-negotiable at every viewport. Bauhaus design was born in architecture and industrial design — it scaled from teacups to buildings. Your UI must do the same.
+
+### Breakpoint Strategy
+- **Desktop (1280px+)**: 12-column grid, full geometric compositions, large typographic statements (64px+ headings)
+- **Tablet (768px–1279px)**: 6-column grid, headings compress to 42–52px, decorative geometric shapes reduce in number (keep 1-2 hero shapes, remove supplementary ones)
+- **Mobile (< 768px)**: 2-column grid (or single-column for text-heavy sections), headings at 32–42px, simplify geometric compositions to 1 accent shape per section
+
+### Spacing Adaptation
+- **Section padding**: 64–128px vertical (desktop) → 40–64px (mobile)
+- **Component padding**: 16–24px internal padding holds steady across breakpoints
+- **Margins**: Generous side margins on desktop (8–12% of viewport); tighter on mobile but never zero — content must never touch the screen edge
+
+### Typography Scaling
+- Hero headings: 64–96px desktop → 36–48px mobile
+- Section headings: 32–48px desktop → 24–32px mobile
+- Body text: 16–18px holds across all breakpoints (readability is non-negotiable)
+- ALL CAPS headings remain ALL CAPS at all sizes
+
+### Geometric Elements at Small Sizes
+- Large background circles/squares scale down proportionally or become partial (cropped by viewport edge — this can look intentionally architectural)
+- Structural lines (horizontal/vertical dividers) remain but may reduce from 3px to 1–2px
+- Decorative triangles and complex compositions simplify — fewer shapes, bolder presence
+
+### Touch & Interaction
+- **Sharp corners (0px radius) stay everywhere** — do not soften for mobile
+- Buttons must maintain at least **44px height** for touch targets, even with 0px border-radius
+- Tap areas on navigation links: minimum 44×44px
+- Spacing between interactive elements: at least 8px to prevent mis-taps
+
+### Performance
+- Flat design with no shadows, no blur, no gradients is **inherently performant** — no GPU-heavy effects, no complex compositing layers. Bauhaus's aesthetic principles align naturally with fast rendering.
+
+## Content & Voice
+
+### Philosophy
+Bauhaus content reads like a **manifesto or a design school lecture** — intellectual, declarative, confident. Every word earns its place. If a sentence doesn't serve a purpose, cut it.
+
+### Tone Characteristics
+- **Intellectual**: Assumes an informed reader. Does not dumb down or over-explain.
+- **Declarative**: Statements, not suggestions. "Form follows function" — not "We think form should maybe follow function."
+- **Confident**: No hedging, no "we believe", no "helping you". Direct address, active voice.
+- **Economical**: Short sentences. Clear structure. No filler words.
+
+### Headlines
+Headlines are **statement-making**. They read like principles, not descriptions:
+- "Form follows function"
+- "Less is more"
+- "Design is thinking made visual"
+- "The material is the message"
+- "Structure determines beauty"
+
+Avoid generic marketing headlines ("Welcome to our platform", "The best solution for your needs").
+
+### Body Copy
+- Clear and purposeful — no fluff, no marketing speak
+- Moderate content density: text is important but whitespace is structural
+- Paragraphs are short (2–4 sentences)
+- Lists are acceptable and encouraged — they impose structure
+
+### CTAs & UI Text
+- Direct and imperative: **"Enter"**, **"Submit"**, **"Begin"**, **"View"**, **"Create"**
+- Not soft or conversational: avoid "Let's go!", "Get started!", "You're all set!"
+- Error messages are factual: "Email format invalid." not "Oops! That doesn't look like an email."
+- Empty states are matter-of-fact: "No items." not "Nothing here yet! Start adding items."
+
+### Formatting Conventions
+- ALL CAPS for headings carries authority — use for H1 and navigation
+- Sentence case for body text and longer subheadings (readability over style)
+- Think **Braun product manuals**, **architectural project descriptions**, **museum exhibition guides**
+
+## Icons & Illustrations
+
+### Philosophy
+Bauhaus iconography follows the same rule as everything else: **geometric only**. Icons are constructed from basic shapes — circles, squares, triangles, and straight lines. They are pictograms, not illustrations.
+
+### Icon Design Rules
+- Built from **basic primitives**: circles, squares, rectangles, triangles, straight lines
+- **No organic curves** — no S-curves, no hand-drawn feel, no freeform paths
+- **No rounded-corner icons** — if a shape is rectangular, its corners are sharp
+- **No detailed pictograms** — simplify to the minimum recognizable form
+- **Uniform stroke weight** (if using outlined style) or solid fill (if using filled style)
+- Consistent optical sizing across the set
+
+### Icon Libraries (If Not Custom)
+- **Custom geometric icons** are the ideal — designed specifically for the project using Bauhaus primitives
+- If using a library: **Heroicons (solid variant)**, simplified to remove any rounded details
+- Avoid: Phosphor (too rounded), Lucide (too many organic curves), emoji-style icons
+
+### Illustration Style
+- **Geometric compositions**: Circles, rectangles, and triangles arranged in deliberate compositions using primary colors (red, blue, yellow) on white or black grounds
+- Think **Kandinsky's compositions** — abstract arrangements of geometric forms with color and spatial relationships
+- Think **Moholy-Nagy's photomontages** — bold, structured, high-contrast
+- Think **Herbert Bayer's typography experiments** — geometry as visual language
+- No hand-drawn illustrations, no organic shapes, no gradients within illustrations
+
+### Photography Treatment
+- **High-contrast black and white** is the primary photographic treatment
+- If color is used: **minimal, desaturated** — or selectively colorized with a single primary accent
+- Photos should be tightly cropped, architecturally composed, and placed within the grid
+- No soft-focus, no light leaks, no filters — sharp and factual
+
+## Accessibility
+
+### Known Strengths
+Bauhaus design has natural accessibility advantages:
+- **High contrast**: Black text on white (or white on near-black) provides excellent contrast ratios, typically exceeding WCAG AAA requirements
+- **Large typography**: The style's preference for bold, oversized headings improves readability
+- **Clear hierarchy**: Strong size differences between heading levels create an unambiguous reading order
+- **No decorative noise**: Flat design with no shadows, no gradients, and no blur means fewer distractions for users with cognitive disabilities
+- **Minimal animation**: The style already favors mechanical, brief transitions — low motion is the default
+
+### Known Risks & Mitigations
+- **0px border-radius on interactive elements**: Square buttons and inputs can be hard to distinguish from static text blocks or containers. **Mitigation**: Ensure buttons have a clear fill color or a thick border, plus a distinct hover/focus state. Never rely on shape alone to signal interactivity.
+- **ALL CAPS reduces readability**: Extended uppercase text slows reading speed and is harder for users with dyslexia. **Mitigation**: Reserve ALL CAPS for short headings (under ~6 words) and navigation labels. Offer sentence case for paragraphs and longer subheadings. Never set body text in ALL CAPS.
+- **Geometric decorative elements**: Circles, triangles, and shapes used as compositional accents carry no semantic meaning. **Mitigation**: Mark all decorative geometric elements with `aria-hidden="true"` and ensure they do not receive focus.
+
+### Focus States
+- Use a **thick accent-colored border** (2–3px) for focus indicators — this aligns perfectly with the style's existing structural border aesthetic
+- Focus outlines should use the primary accent color (red, blue, or yellow) for high visibility
+- Never remove focus outlines; the Bauhaus border language gives you a natural, on-brand way to show them
+- Example: `outline: 3px solid #E63B2E; outline-offset: 2px;`
+
+### Motion & Reduced Motion
+- `prefers-reduced-motion`: Bauhaus already uses minimal, mechanical animation (150–250ms, no spring/bounce). For reduced-motion users, disable even these brief transitions — snap to final state.
+- No auto-playing animations, carousels, or looping motion
+
+### Color & Contrast
+- Test all primary accent colors against both light and dark canvases — Bauhaus yellow (#F2C41D) on white fails WCAG AA for text. Use yellow only for large decorative elements or non-text indicators, never for body text.
+- Dark mode contrast: Off-white text (#F5F5F0) on near-black (#1A1A1A) passes WCAG AAA (ratio ~16:1)
+
 ## Do's and Don'ts
 
 ### Do
-- Use geometric shapes (circles, squares, triangles) as design elements
-- Create strong visual hierarchy through size contrast
-- Let whitespace do heavy lifting
-- Use primary colors boldly but sparingly
-- Align everything to a grid
-- Use rules (horizontal/vertical lines) as compositional tools
-- Keep the overall page count of colors under 4 (including black and white)
+- Use geometric shapes (circles, squares, triangles) as design elements — **they are the visual DNA of Bauhaus, not optional decoration; without them, the style is just "minimal"**
+- Create strong visual hierarchy through size contrast — **Bauhaus used dramatic scale shifts (small body text vs. massive headings) to guide the eye without relying on color or ornament**
+- Let whitespace do heavy lifting — **in Bauhaus, empty space is structural; it defines zones and creates rhythm just as powerfully as filled space**
+- Use primary colors boldly but sparingly — **restraint is what makes a single red circle powerful; flood the page with color and you lose the contrast that defines the style**
+- Align everything to a grid — **the grid is the intellectual backbone of Bauhaus; breaking it signals carelessness, not creativity**
+- Use rules (horizontal/vertical lines) as compositional tools — **visible structural lines reference the architectural origins of the movement and create visual order**
+- Keep the overall page count of colors under 4 (including black and white) — **Bauhaus color theory is about deliberate selection; every color must justify its presence**
 
 ### Don't
-- Round corners on rectangular elements
-- Use drop shadows for depth
-- Apply gradients or blurred backgrounds
-- Use more than 2-3 typefaces
-- Center everything — asymmetry is key
-- Add decorative illustrations or icons that aren't geometric
-- Use script or handwritten fonts
+- Round corners on rectangular elements — **border-radius softens the rational, geometric precision that defines Bauhaus; it introduces an organic quality that contradicts the style's machine-age philosophy**
+- Use drop shadows for depth — **shadows simulate physical light and three-dimensionality; Bauhaus achieves depth through flat color blocking and compositional overlap, never through illusion**
+- Apply gradients or blurred backgrounds — **gradients and blur are decorative effects that add visual complexity without communicating meaning; Bauhaus demands that every visual element serves a purpose**
+- Use more than 2-3 typefaces — **typographic restraint mirrors the broader Bauhaus principle of reduction to essentials; multiple typefaces create noise, not variety**
+- Center everything — asymmetry is key — **Bauhaus pioneered asymmetric layouts as a rejection of classical symmetry; centering everything produces static, lifeless compositions**
+- Add decorative illustrations or icons that aren't geometric — **organic or illustrative elements break the geometric language; if it can't be built from circles, squares, triangles, and lines, it doesn't belong**
+- Use script or handwritten fonts — **Bauhaus explicitly rejected ornamental letterforms; the movement created geometric typefaces (like Universal) as a statement against decorative tradition**
 
 ## Implementation Hints (Tailwind)
 

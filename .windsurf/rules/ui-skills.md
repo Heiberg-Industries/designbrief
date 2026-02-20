@@ -1,6 +1,6 @@
 # UI Skills
 
-A library of 20 UI design direction files providing style guardrails for building tasteful interfaces.
+A library of 21 UI design direction files providing style guardrails for building tasteful interfaces.
 
 ## Workflow
 
@@ -25,14 +25,24 @@ When generating UI code, use the style file as your design system:
 - **Components**: Shape buttons, cards, inputs per the style's guidance
 - **Layout**: Follow the style's grid and composition principles
 - **Effects**: Apply borders, shadows, blur per the style's visual depth rules
+- **Dark mode**: Check the style's Dark Mode section — ask if the user wants dark, light, or both
+- **Responsive**: Apply the style's responsive guidance — ensure touch targets and mobile spacing
+- **Content & voice**: Match headline tone, CTA language, and microcopy to the style's Content & Voice section
+- **Icons**: Use the style's recommended icon sets and illustration approach
+- **Accessibility**: Verify contrast ratios and focus states per the style's Accessibility section
 
-### 3. Stay Consistent
+### 3. Teach Along the Way
+
+When making design choices, briefly explain *why* — one sentence per choice helps the user build design taste over time.
+
+### 4. Stay Consistent
 
 - Reference the style file for every new component
 - Do not mix styles unless explicitly asked
 - The style's "Don'ts" section is as important as its "Do's"
 - Prioritize readability and accessibility over style purity
+- Maintain consistency across all dimensions: color, typography, spacing, dark mode, responsive behavior, content voice
 
 ## Available Styles
 
-anti-design, art-deco, aurora, bauhaus, bento-grid, claymorphism, corporate-modern, dark-mode-premium, flat-design, glassmorphism, japandi, material-design, minimalism, neubrutalism, neumorphism, organic, retro-futurism, skeuomorphism, swiss, y2k-revival
+anti-design, art-deco, aurora, bauhaus, bento-grid, claymorphism, corporate-modern, dark-mode-premium, flat-design, freeform, glassmorphism, japandi, material-design, minimalism, neubrutalism, neumorphism, organic, retro-futurism, skeuomorphism, swiss, y2k-revival

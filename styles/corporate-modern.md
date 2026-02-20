@@ -165,25 +165,138 @@ Animation is **polished but invisible** — it makes the UI feel responsive and 
 - **Micro-interactions**: Button press (slight scale 0.98), smooth toggle switches, input focus transitions
 - **Avoid**: Bouncy springs, dramatic entrances, parallax, anything that feels "fun" over "professional"
 
+## Dark Mode & Light Mode
+
+### Philosophy
+Light-first. Corporate Modern is overwhelmingly light mode — white backgrounds signal professionalism and openness. Dark mode is supported but secondary.
+
+### Light Mode (Default)
+- White (#FFFFFF) backgrounds for main content, very light gray (#F9FAFB, #F3F4F6) for alternating sections
+- Near-black text (#111827, #1F2937) for primary, gray (#6B7280) for secondary
+- This is the canonical Corporate Modern look
+
+### Dark Mode
+- **Base background**: Cool dark gray — #111827 (gray-900) or #1F2937 (gray-800)
+- **Card surfaces**: #1F2937 or #374151 (gray-700) — one step lighter than the base
+- **Borders**: Gray-700 (#374151) — borders become more important in dark mode to define edges that shadows can't
+- **Text**: White (#FFFFFF) for primary, gray-300 (#D1D5DB) for secondary
+- **Primary accent**: Slightly brightened blue — #3B82F6 (blue-500) or #60A5FA (blue-400) to maintain vibrancy against dark backgrounds
+- **Alternating sections**: Use slightly lighter dark grays (#1F2937 vs #111827) instead of white/gray-50
+- The blue-dominant palette works beautifully in dark mode — blue is one of the best accent colors against dark backgrounds
+
+## Responsive & Mobile
+
+### Breakpoint Behavior
+- **12-column grid collapses**: 3-col features → 2-col (tablet) → 1-col (mobile)
+- **Typography scales**: Display 48-56px → 32-36px on mobile. Headings scale proportionally.
+- **Section padding**: 80-120px vertical → 48-64px on mobile
+- **Card padding**: 24-32px → 16-20px on mobile
+
+### Mobile Navigation
+- Sticky white navbar with hamburger menu icon
+- Clean slide-out panel (full-width or 80% width from right)
+- Same white background, same clean typography
+- Touch-friendly tap targets throughout
+
+### Mobile-Specific Adjustments
+- Touch targets already comfortable at 40-44px button heights
+- Cards stack in a single column with consistent vertical spacing
+- Logo bar wraps to 2 rows or becomes a horizontally scrollable strip
+- Pricing cards stack vertically with the "popular" card positioned on top
+- This style is inherently responsive-friendly — the systematic grid and generous spacing translate naturally to smaller screens
+
+## Content & Voice
+
+### Tone
+Professional, clear, benefit-oriented. Think Stripe or Intercom's copywriting — authoritative without being stiff, warm without being casual.
+
+### Headlines
+- Benefit-driven, not feature-driven: "Ship faster with confidence", "Built for teams that scale"
+- Clear and direct — the reader should instantly understand the value proposition
+- Sentence case, not Title Case for most headlines
+
+### Body Copy
+- Clear, avoids jargon, speaks to business outcomes
+- Short paragraphs (2-3 sentences max in marketing sections)
+- Active voice preferred
+
+### CTAs
+- Professional action verbs: "Get started", "Request demo", "Start free trial", "Talk to sales"
+- Never aggressive or pushy: avoid "Buy NOW!", "Don't miss out!!"
+
+### Microcopy & UI Text
+- Error messages: factual and helpful ("Payment failed — please check your card details")
+- Empty states: warm but professional ("No projects yet. Create your first project to get started.")
+- No slang, no exclamation marks, no emoji
+- Confirmations are clear and specific
+
+### Social Proof Copy
+- Specific numbers and outcomes: "99.9% uptime", "Trusted by 10,000+ teams", "4.8/5 on G2"
+- Named customer quotes with real titles and companies
+
+## Icons & Illustrations
+
+### Icons
+- **Style**: Simple, line-style at 1.5px stroke weight
+- **Color**: Primary blue or gray-400 — never multicolor
+- **Size**: Consistent 20-24px throughout the interface
+- **Libraries**: Heroicons (outline variant) or Lucide are perfect fits for Corporate Modern
+- **Usage**: Primarily in feature sections, navigation, and form inputs. Used to support text, never as standalone communication.
+
+### Illustrations
+- Clean, geometric, semi-flat style with muted colors from the brand palette
+- Think Stripe's illustration style — abstract, professional, slightly technical
+- No 3D renders, no hand-drawn/sketchy styles, no cartoon characters
+- Used sparingly — in hero sections, empty states, or feature explanations
+
+### Photography
+- Professional, bright, well-lit images
+- Diverse team photos in modern office settings
+- Product screenshots presented with browser chrome or device frames
+- Clean and corporate but not generic stock-photo energy — authenticity matters
+
+## Accessibility
+
+### Inherent Strengths
+Corporate Modern is naturally accessibility-friendly — clean hierarchy, blue on white (strong contrast), systematic spacing, and consistent component patterns all contribute to an accessible baseline. The systematic approach naturally produces accessible UIs.
+
+### Known Risks
+- **Light gray secondary text**: #6B7280 (gray-500) on white backgrounds yields approximately 4.6:1 contrast — borderline for WCAG AA on small text. **Use #4B5563 (gray-600) for body-sized secondary text** to ensure compliance.
+- **Blue on light gray**: Primary blue on gray-50 backgrounds — verify contrast if using lighter blue shades.
+
+### Focus States
+- Blue outline ring matching the primary color: `ring-2 ring-blue-600 ring-offset-2`
+- Visible and consistent across all interactive elements
+- Never remove focus indicators — they are essential for keyboard navigation
+
+### Motion Sensitivity
+- Respect `prefers-reduced-motion`: disable fade-in-on-scroll entrance animations, reduce transitions to instant or near-instant
+- Core functionality must never depend on animation
+
+### Semantic Structure
+- The section-based layout maps naturally to semantic HTML landmarks (`header`, `main`, `section`, `footer`)
+- Clear heading hierarchy (h1 → h2 → h3) follows naturally from the typographic scale
+- Card grids should use proper list markup when representing collections
+
 ## Do's and Don'ts
 
 ### Do
-- Use a blue-dominant palette with neutral supporting colors
-- Keep border-radius consistent (8-12px) across all components
-- Organize content into clear sections with generous whitespace
-- Use systematic spacing based on an 8px grid
-- Include social proof elements (logos, testimonials, metrics)
-- Make the page feel trustworthy and organized
-- Test at multiple screen sizes — corporate sites must be responsive
+- Use a blue-dominant palette with neutral supporting colors — blue is the most universally trusted color and anchors the entire Corporate Modern identity
+- Keep border-radius consistent (8-12px) across all components — inconsistent rounding is the fastest way to break the systematic feel
+- Organize content into clear sections with generous whitespace — whitespace signals professionalism and makes content scannable
+- Use systematic spacing based on an 8px grid — systematic spacing creates the subconscious sense of order that defines this style
+- Include social proof elements (logos, testimonials, metrics) — B2B buyers need evidence, and social proof is the most efficient trust signal
+- Make the page feel trustworthy and organized — Corporate Modern exists to convert business buyers, and trust is the prerequisite
+- Test at multiple screen sizes — corporate sites reach decision-makers on every device, from desktop monitors to phones in taxis
 
 ### Don't
-- Use vivid, playful colors (neon, hot pink, lime green)
-- Use 0px border-radius (too brutalist) or 24px+ (too playful)
-- Crowd content together — professional = spacious
-- Use decorative or display fonts — keep typography clean and neutral
-- Add unnecessary animation — every motion should be purposeful
-- Use dark backgrounds for the main page (light backgrounds signal professionalism)
-- Sacrifice readability for style — content is king in B2B
+- Use vivid, playful colors (neon, hot pink, lime green) — they undermine the professional credibility that Corporate Modern is built on
+- Use 0px border-radius (too brutalist) or 24px+ (too playful) — the 8-12px range is the signature; outside it, the style identity breaks
+- Crowd content together — professional = spacious; dense layouts signal "enterprise legacy software" not "modern SaaS"
+- Use decorative or display fonts — they draw attention to themselves, breaking the "invisible typography" principle
+- Add unnecessary animation — every motion should be purposeful; gratuitous animation feels unserious to business buyers
+- Use dark backgrounds for the main page — light backgrounds signal professionalism and openness; dark is reserved for dark mode, not the default
+- Sacrifice readability for style — content is king in B2B; if a prospect can't quickly scan your value proposition, no amount of polish saves it
 
 ## Implementation Hints (Tailwind + CSS)
 

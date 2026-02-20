@@ -1,0 +1,45 @@
+{
+  "name": "TBD",
+  "version": "1.0.0",
+  "description": "Design direction for AI-generated UI. 20 style guardrail files that give LLMs the context to build tasteful, consistent interfaces.",
+  "license": "MIT",
+  "author": "Heiberg Industries (https://heiberg.co)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Heiberg-Industries/ui-skills.git"
+  },
+  "homepage": "https://tools.heiberg.co/ui-skills",
+  "bugs": {
+    "url": "https://github.com/Heiberg-Industries/ui-skills/issues"
+  },
+  "keywords": [
+    "ai",
+    "ui",
+    "design",
+    "agent-skills",
+    "claude",
+    "cursor",
+    "windsurf",
+    "copilot",
+    "codex",
+    "style",
+    "guardrails",
+    "design-system"
+  ],
+  "bin": {
+    "ui-skills": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "styles/",
+    "SKILL.md",
+    "AGENTS.md",
+    ".cursor/",
+    ".windsurf/",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

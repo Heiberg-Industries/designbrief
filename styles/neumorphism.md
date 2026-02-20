@@ -163,6 +163,26 @@ Animation in neumorphism is **gentle and physical** — elements press in and pu
 - **Toggle**: Smooth slide with shadow inversion
 - **Avoid**: Bouncy, springy, or exaggerated animations. The movement should feel like pressing a real button — physical but not cartoonish.
 
+## Dark Mode & Light Mode
+
+Light mode is primary (soft muted neutral base #E0E5EC). Dark mode is MUCH harder: dark base (#2D3436, #353535), dark shadow barely darker than base, "light" shadow is a subtle gray (not white — rgba(255,255,255,0.05-0.1)). The contrast between shadows is severely reduced in dark mode, making the effect subtler. Warm or cool dark base — maintain consistency. The element-matches-background rule still applies. Dark neumorphism requires careful shadow calibration — test on real screens.
+
+## Responsive & Mobile
+
+Neumorphism has inherent mobile challenges: the dual-shadow system needs screen space. On small screens: reduce shadow offset (8px → 4-6px), reduce blur (16px → 8-12px). Fewer elements per viewport (3-5 max). Touch targets: raised buttons are naturally good targets but must be at least 44px. Inputs (inset) must be visually distinct enough to tap. Simple layouts — center-aligned or single-column. Performance: dual shadows are computationally heavier than single shadows — limit neumorphic elements on mobile to 5-8 visible at once.
+
+## Content & Voice
+
+Quiet, functional, tool-like. Think smart home app or calculator. Headlines: simple and descriptive ("Timer", "Volume", "Settings", "Now Playing"). Body copy is minimal — labels and values, not paragraphs. CTAs are functional single words ("Start", "Stop", "Save"). Error messages are brief and clear. Microcopy is utilitarian. Content density: LOW — each element is a tool/control, not a content block. The interface communicates through interaction, not text.
+
+## Icons & Illustrations
+
+Clean, single-color line icons at medium weight (1.5-2px). Icons sit ON neumorphic surfaces — they should not have their own shadows or containers (the surface provides the container). Icon color: same as text (dark gray). Active icons: accent color. Avoid: colorful or multi-tone icons, 3D icons (they fight with the neumorphic 3D). Illustration: rarely used — the tactile surfaces ARE the visual interest. If used: simple, flat, monochrome. Recommend: Lucide, Radix Icons, Heroicons (outline).
+
+## Accessibility
+
+THIS IS THE BIGGEST CHALLENGE. Known risks: low contrast between raised elements and background (they're the SAME color — only shadows distinguish them). Users with low vision or on low-contrast screens may not see element boundaries at all. Remediation: ensure text contrast meets WCAG AA on the base color. Consider adding a very subtle 1px border (white/15%) as a fallback for users who can't perceive shadows. The pressed/raised state distinction is entirely shadow-based — add aria-pressed for interactive elements. Focus states: accent-colored ring (critical — without it, focused elements are invisible). prefers-reduced-motion: disable raise/press shadow transitions.
+
 ## Do's and Don'ts
 
 ### Do

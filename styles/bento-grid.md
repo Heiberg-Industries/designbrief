@@ -143,6 +143,26 @@ Animation in bento grids is **staggered and spatial** — tiles enter the viewpo
 - **Transitions**: 300-400ms, ease-out
 - **Avoid**: Tiles moving or rearranging. The grid should feel solid once assembled.
 
+## Dark Mode & Light Mode
+
+Equally suited. Light mode: #F5F5F7 background, white tiles. Dark mode: near-black base (#111111, #1A1A1A), dark gray tiles (#2A2A2A, #333). Featured/hero tile: accent color or rich dark fill. Tile borders become more important in dark mode (white/8-12%). Consistent tile radius in both modes. The tile differentiation through fill color works in both modes.
+
+## Responsive & Mobile
+
+Critical challenge: bento's mixed-size tiles must collapse gracefully. Strategy: 4-col → 2-col → 1-col. On mobile, hero tile becomes full-width. 2x1 tiles become full-width. 1x1 tiles stay 50% width (2-col) or full-width (1-col). Tile HEIGHT should adapt to content on mobile (remove fixed row-height). Gap can tighten slightly (12px → 8px) but must stay uniform. Touch targets: tiles are naturally large. Performance: no concerns — CSS Grid is lightweight.
+
+## Content & Voice
+
+Headline-driven, concise, scannable. Each tile has one clear message. Headlines: short, punchy, product-focused ("Lightning fast", "Built-in security", "99.9% uptime"). Body: 1-2 sentences MAX per tile. Stat tiles: one big number + one label. CTA tiles: clear action verb + brief context. The bento format rewards extreme brevity — if you can say it in 3 words, don't use 10. Think Apple keynote slides.
+
+## Icons & Illustrations
+
+Each tile type uses visuals differently. Stat tiles: large numbers ARE the visual. Feature tiles: one icon or small illustration per tile. Visual tiles: screenshots, product images, or abstract illustrations. Icons: modern, clean, consistent weight (Lucide, SF Symbols, Phosphor). Illustrations: abstract, gradient-based, or product screenshots. Keep icon/illustration style consistent across ALL tiles.
+
+## Accessibility
+
+Known strengths: large tiles provide big touch targets, clear visual hierarchy. Known risk: the bento's visual scanning pattern (large tile = important) must be reflected in DOM order — screen readers need the same priority. Ensure semantic HTML ordering matches visual importance. Color-only tile differentiation needs text labels. Focus: visible focus ring on tiles with consistent radius. prefers-reduced-motion: disable staggered entrance animations.
+
 ## Do's and Don'ts
 
 ### Do

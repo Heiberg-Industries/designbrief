@@ -170,6 +170,160 @@ Animation in Retro Futurism is **cinematic and atmospheric**. The background LIV
 - **Glitch**: Occasional intentional "glitch" on headings — brief RGB offset or displacement
 - **Transitions**: 200-400ms, ease-out for standard UI. Ambient animations can be much slower (4-10s cycles).
 
+## Dark Mode & Light Mode
+
+Retro Futurism (synthwave variant) is **dark-only** — the style requires darkness for neon glow effects to work. The space-age and Y2K variants have more flexibility.
+
+### Synthwave (Dark Only)
+- Background: Deep purple-black (#0D0221, #1A0A2E) — NON-NEGOTIABLE
+- Neon colors (#FF2D95, #00FFFF) REQUIRE dark backgrounds to glow
+- There is no "light mode synthwave" — it's like asking for a neon sign in daylight
+
+### Space-Age Variant
+- Dark mode: Deep navy (#0A1628) with chrome and orange accents
+- Light mode: Warm cream (#F5F0E8) with orange, teal, and brown — retro print poster feel
+- Both modes work well for this variant
+
+### Y2K Variant
+- Light mode (default): Silver/chrome backgrounds with candy-bright accents
+- Dark mode: Near-black (#111111) with chrome reflections and neon accents — "The Matrix" side of Y2K
+- Both modes work, but light is more authentically Y2K
+
+### CSS Custom Properties (Synthwave)
+```css
+:root {
+  --retro-bg: #0D0221;
+  --retro-bg-mid: #1A0A2E;
+  --retro-neon-pink: #FF2D95;
+  --retro-neon-cyan: #00FFFF;
+  --retro-purple: #7209B7;
+  --retro-text: #FFFFFF;
+  --retro-text-dim: rgba(255, 255, 255, 0.6);
+  --retro-surface: rgba(255, 255, 255, 0.03);
+}
+```
+
+## Responsive & Mobile
+
+### Typography Scaling
+- Hero headings: Desktop 72-96px → Tablet 48-64px → Mobile 36-48px
+- Body: 14-16px across all breakpoints
+- Neon text-shadow: Reduce blur radius on mobile (40px → 20px) to prevent bleed on small screens
+
+### Spacing Adaptation
+- Hero sections: 100vh on desktop → 70-80vh on mobile (or auto with min-height)
+- Section padding: Desktop 80-120px → Tablet 60px → Mobile 40px
+- Card grids: 3-col → 2-col → 1-col
+
+### Layout Behavior
+- Perspective grid floor: Reduce complexity on mobile or replace with simple gradient
+- Star field background: Reduce particle count on mobile for performance
+- Centered compositions adapt naturally to mobile
+
+### Touch Targets
+- Neon-bordered buttons: Ensure 44px minimum height — thin neon borders can feel small
+- Add padding inside glow buttons to ensure the touch area covers the visual glow
+
+### Performance (Critical for Retro Futurism)
+- **Neon glow (text-shadow/box-shadow with multiple layers)**: EXPENSIVE on mobile — reduce to 1-2 shadow layers instead of 3-4
+- **Perspective grid**: CSS perspective transform + repeating gradients — can cause jank on low-end mobile. Replace with a static gradient or simple image on mobile.
+- **Star field animations**: If using JS particles, reduce count to 50-100 on mobile
+- **Scan line overlay**: repeating-linear-gradient is lightweight — safe on mobile
+- **Background gradient animations**: Slow, gentle animations (8s+) are fine. Avoid per-frame JS animations.
+- Use `@media (prefers-reduced-motion: reduce)` to disable ambient background animations
+
+## Content & Voice
+
+### Headline Tone
+Cinematic, dramatic, and era-specific:
+- **Synthwave**: "NEON DREAMS", "BEYOND THE GRID", "MIDNIGHT PROTOCOL", "ELECTRIC HORIZONS"
+- **Space-age**: "The Future Is Now", "Mission Control", "Orbit", "Destination Tomorrow"
+- **Y2K**: "Loading the Future", "Digital Playground", "Connect 2000"
+ALL CAPS for synthwave, title case for space-age, mixed for Y2K.
+
+### Body Copy
+Modern and clear — the retro styling carries the era reference, not the copy:
+- Short, punchy sentences
+- Can reference the era's optimism: "Built for what's next"
+- Avoid actual period-accurate slang (too gimmicky)
+- Technical vocabulary is welcome — retro futurism loves the language of technology
+
+### CTAs
+Era-flavored but functional:
+- Synthwave: "Enter the Grid", "Initialize", "Launch"
+- Space-age: "Begin Mission", "Launch Sequence", "Engage"
+- Y2K: "Enter", "Connect", "Go"
+- Keep them short — one or two words, punchy
+
+### Microcopy
+Can lean into the retro-tech theme:
+- Error: "SIGNAL LOST — Reconnecting..." or "System malfunction. Retry?"
+- Loading: "Initializing..." or "Establishing connection..."
+- Empty state: "No signal detected" or "Scanning frequencies..."
+
+### Content Density
+LOW — retro futurism is atmospheric. The background effects, neon glow, and cinematic spacing ARE the content. Text is minimal, impactful, and sparse.
+
+## Icons & Illustrations
+
+### Icon Style
+Geometric, angular, tech-themed:
+- **Synthwave**: Thin line icons (1.5px), angular/geometric. Neon-colored or white.
+- **Space-age**: Bolder strokes (2px), rounded, retro-tech (radar, satellite, rocket)
+- **Y2K**: Glossy, rounded, bubble-like icons
+
+### Recommended Sets
+- Phosphor Icons (thin or light weight) — great for synthwave
+- Custom SVG: Circuit-like icons, geometric wireframes
+- Avoid: Organic, hand-drawn, or filled chunky icons
+
+### Illustrations & Decorative Art
+- **Synthwave**: Grid floors, chrome mountains, sunset circles, wireframe objects, laser beams
+- **Space-age**: Retro rocket illustrations, orbital rings, planet silhouettes
+- **Y2K**: Chrome orbs, bubble shapes, CD-ROM iridescence
+- Photography: Rare in retro futurism — the style is illustrative/atmospheric, not photographic
+- If photography is used: heavy color treatment (duotone in neon colors), grain overlay
+
+### Background Art (Essential)
+The background IS the illustration in retro futurism:
+- Perspective grids (synthwave)
+- Star fields (space-age)
+- Chrome/metallic patterns (Y2K)
+- These aren't optional decorations — they're fundamental to the style
+
+## Accessibility
+
+### Contrast
+- **Neon pink (#FF2D95) on dark (#0D0221)**: ~5.2:1 — PASSES AA for normal text
+- **Neon cyan (#00FFFF) on dark (#0D0221)**: ~12:1 — excellent
+- **White on dark**: ~18:1 — excellent
+- **Low-opacity text (60% white)**: ~7:1 on dark backgrounds — passes
+- **RISK**: Neon glow text-shadow can REDUCE perceived readability despite good contrast ratios — the glow creates visual noise. Keep body text glow-free; reserve neon glow for headings only.
+
+### Focus States
+Neon-glow focus ring matching the style:
+```css
+:focus-visible {
+  outline: 2px solid var(--retro-neon-cyan, #00FFFF);
+  outline-offset: 4px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+```
+
+### Motion (Critical for Retro Futurism)
+Retro futurism is animation-HEAVY (background grids, star fields, neon pulses, glitch effects). All of these must respect `prefers-reduced-motion`:
+- **Disable**: Grid scrolling, star field twinkling, neon pulse animations, glitch effects
+- **Keep**: Static neon colors, glow shadows (they don't move), gradient backgrounds, scan line texture (it's a static overlay)
+- The style loses its most atmospheric layer with reduced motion, but the color palette and typography still convey the era.
+
+### Known Risks
+- **Scan line overlay** reduces contrast by ~15% — ensure base contrast ratios account for this (aim for 6:1+ before scan lines)
+- **Neon glow on text** creates visual noise — use only on large headings, never on body text or UI labels
+- **Perspective grid animations** can trigger motion sensitivity — always behind `prefers-reduced-motion`
+- **High saturation neon colors** (#FF00FF, #00FFFF) can cause visual fatigue — use sparingly for accents, not for large text blocks
+- **Dark backgrounds with bright text**: Some users with astigmatism find light-on-dark harder to read. Offer a high-contrast mode or increase text weight slightly (500 instead of 400).
+- **Glitch effects**: Can be seizure triggers — always respect prefers-reduced-motion, and keep glitch animations subtle (small offset, not full-screen flash)
+
 ## Do's and Don'ts
 
 ### Do
@@ -181,11 +335,11 @@ Animation in Retro Futurism is **cinematic and atmospheric**. The background LIV
 - Use dark backgrounds for synthwave — the neon needs darkness to glow
 
 ### Don't
-- Mix eras randomly — pick one and stay consistent
+- Mix eras randomly — because each retro-futurism sub-genre has a specific, recognizable visual signature; mixing 80s neon with 70s earth tones creates confusion rather than fusion
 - Use generic color palettes — the colors MUST signal the era
-- Skip decorative elements — they separate retro futurism from "dark theme with pink"
+- Skip decorative elements — they're what separates retro futurism from "dark theme with pink"; the grid floor, scan lines, and glow effects ARE the style's atmosphere
 - Make body text hard to read — the retro styling is for atmosphere, not for body copy
-- Overdo glitch effects — one or two subtle touches, not constant noise
+- Overdo glitch effects — because constant visual noise overwhelms content and can trigger seizures; one or two subtle touches create intrigue, more creates chaos
 - Forget contrast — neon on dark needs careful checking for readability
 
 ## Implementation Hints (Tailwind + CSS)

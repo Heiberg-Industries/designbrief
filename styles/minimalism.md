@@ -138,24 +138,212 @@ Animation in Minimalism is **nearly imperceptible** — so subtle that users fee
 - **Scroll**: No parallax. Content simply appears as you scroll. Optional fade-in-on-scroll.
 - **Avoid**: Anything bouncy, springy, fast, or attention-grabbing. The goal is calm.
 
+## Dark Mode & Light Mode
+
+### Mode Preference
+Minimalism is equally suited to both light and dark modes. White-on-white minimalism and dark-on-dark minimalism are both powerful expressions of restraint. Neither mode is "primary" — the choice depends on brand personality and content type. Photography-heavy sites often benefit from dark mode; text-heavy editorial sites often benefit from light mode.
+
+### Light Mode
+- **Background**: White (#FFFFFF) or off-white (#FAFAFA, #F8F7F4)
+- **Text**: Near-black (#1A1A1A) for primary, medium gray (#888888) for secondary
+- **Borders**: Hairline in light gray (#E5E5E5, #EBEBEB)
+- **Accent**: Single accent color at full saturation
+- The classic minimalist expression — clean, open, airy
+
+### Dark Mode
+- **Background**: Near-black (#0A0A0A, #111111) — never pure #000000
+- **Text**: Off-white (#E8E8E8) for primary, muted gray (#D4D4D4, #A3A3A3) for secondary
+- **Borders**: Become more important for definition — shift to `rgba(255,255,255,0.1)` or subtle light borders (#222222, #2A2A2A)
+- **Accent**: Same single accent color, slightly brightened (+10-15% lightness) to maintain contrast
+- **Shadows**: Nearly invisible — replace with subtle border-based separation
+- The restraint is even more dramatic in dark mode — every element matters more. A single accent-colored link on a dark page is striking.
+
+### Implementation
+Both modes use the same single accent color (adjusted for contrast). Toggle via CSS custom properties or Tailwind's `dark:` variant:
+
+```css
+:root {
+  --color-bg: #FFFFFF;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #888888;
+  --color-border: #EBEBEB;
+  --color-accent: #2563EB;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0A0A0A;
+    --color-text-primary: #E8E8E8;
+    --color-text-secondary: #A3A3A3;
+    --color-border: rgba(255, 255, 255, 0.1);
+    --color-accent: #3B82F6; /* Same hue, slightly brighter */
+  }
+}
+```
+
+```
+/* Tailwind dark: examples */
+/* Background */
+bg-white dark:bg-[#0A0A0A]
+
+/* Primary text */
+text-[#1A1A1A] dark:text-[#E8E8E8]
+
+/* Secondary text */
+text-[#888888] dark:text-[#A3A3A3]
+
+/* Borders */
+border-[#EBEBEB] dark:border-white/10
+
+/* Card surface */
+bg-white dark:bg-[#111111] border border-[#EBEBEB] dark:border-white/10
+
+/* Button — accent */
+bg-[#2563EB] dark:bg-[#3B82F6] text-white
+```
+
+### Guidance
+Neither mode is recommended over the other — both are equally valid expressions of minimalism. Light mode feels more open and editorial; dark mode feels more dramatic and immersive. Use `prefers-color-scheme` to respect user preference, or let the brand dictate a single mode.
+
+## Responsive & Mobile
+
+### Breakpoint Strategy
+Minimalism is naturally mobile-friendly. Single-column layouts, large text, and generous spacing translate effortlessly to small screens. The core challenge is compressing the generous whitespace without losing the feel of spaciousness. Design mobile-first — minimalism's simplicity makes this straightforward.
+
+### Typography Scaling
+- **Hero headings**: 48-80px desktop → 32-48px mobile. Keep Light weight (300) — the text is still large enough to carry it.
+- **Body text**: 16-18px across all breakpoints — no change needed
+- **Hierarchy**: Maintain the dramatic size contrast between headings and body, even at mobile scale. A 36px Light heading over 16px body is still recognizably minimalist.
+
+### Spacing Adaptation
+- **Section padding**: 120-200px desktop → 80-120px tablet → 48-80px mobile. Maintain the RATIO of whitespace to content — even compressed, sections should feel generous.
+- **Element spacing**: 32-64px desktop → 24-48px tablet → 16-32px mobile
+- **Card/container padding**: 32-48px desktop → 24-32px mobile
+
+### Layout Collapse
+- **Content column**: 640-800px max-width fits naturally on all screens — no collapse needed for single-column layouts
+- **Multi-column grids**: 2-col → 1-col at tablet. Minimalism rarely needs a 3-col grid.
+- **Asymmetric layouts**: Stack vertically with generous spacing between blocks
+
+### Navigation
+Keep it minimal on mobile. Simple text links work on small screens, or use a minimal menu icon (a thin line or dot). No hamburger menus with elaborate slide-out panels — that contradicts minimalism. A single icon that reveals a clean list of text links is sufficient.
+
+### Touch & Performance
+- **Touch targets**: Buttons already have comfortable padding (px-6 py-3 minimum). Ensure all interactive elements meet 44px minimum.
+- **Performance**: Minimalism is inherently performant — few images, no complex effects, minimal JavaScript. Large hero photography should be optimized and lazy-loaded.
+
+```
+/* Tailwind responsive spacing */
+/* Section padding — generous compression */
+py-12 md:py-20 lg:py-32 xl:py-48
+
+/* Hero heading — scales down gracefully */
+text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight
+
+/* Content column — naturally responsive */
+max-w-2xl lg:max-w-3xl mx-auto px-6
+```
+
+## Content & Voice
+
+### Headline Tone
+Precise, edited, essential. Headlines are short and confident — every word earns its place, just like every visual element. Avoid cleverness, puns, or marketing energy. Think declarative statements, not questions or exclamations.
+
+Example headlines:
+- "Less"
+- "Clarity"
+- "Made simple"
+- "Essential objects for everyday life"
+- "Nothing more than necessary"
+
+### Body Copy
+Concise and intentional. If you can say it in 10 words, don't use 20. The writing style mirrors the design: restrained, intentional, and confident. No filler phrases ("In order to", "It's important to note that"). Every sentence carries meaning. Think Apple's product copy — measured, precise, and quietly assured. Reading level is accessible but not dumbed down.
+
+### CTAs & Microcopy
+- **Button labels**: Minimal — one or two words maximum. "Shop", "Read", "Enter", "View", "Continue". Not "Shop Our Collection Now!" or "Click Here to Read More".
+- **Error messages**: Brief and calm. "Email required." not "Oops! Looks like you forgot your email! 😅". No exclamation marks, no emoji, no marketing superlatives.
+- **Empty states**: Simple statement + single action. "No items yet. Add one." Not a paragraph of explanation.
+- **Tooltips & helpers**: Direct and concise. One sentence maximum.
+
+### Content Density
+LOW. Generous space between text blocks. One idea per section. Short paragraphs (2-3 sentences). Favor whitespace over content. If a page feels "empty," it's probably right. The writing style mirrors the design: restrained, intentional, and confident.
+
+## Icons & Illustrations
+
+### Icon Style
+Extremely minimal. Thin line icons (1-1.5px stroke weight) or no icons at all — if the text is clear enough, skip the icon. When used, icons are monochrome: same color as text (primary or secondary) or the single accent color. Never multicolored. Never with background circles, squares, or containers. Icons serve function, not decoration — use them only for navigation, actions, and status indicators.
+
+### Illustration Approach
+Rarely used. Minimalism relies on typography and photography to carry visual weight, not illustration. If illustration is absolutely necessary, keep it line-based, monochromatic, and restrained. Abstract geometric forms (thin lines, simple shapes) can work. No complex scenes, characters, or decorative flourishes.
+
+### Photography Direction
+Photography is the primary visual element in minimalism. Use it large and confident — full-bleed or nearly so. Photography should be:
+- **Composition**: Minimal — clean subjects, simple backgrounds, generous negative space within the photograph itself
+- **Color**: Muted, desaturated, or black and white. Black and white photography is particularly effective in minimalist design.
+- **Quality**: High-resolution, professionally shot or curated. With so few visual elements, every image is scrutinized.
+- **Treatment**: No filters, overlays, or text on images. Let the photograph stand alone.
+
+### Recommended Sources
+- **Icons**: Feather Icons, Lucide (at thin/light weight), or custom minimal icons. Avoid filled icon sets.
+- **Photography**: Unsplash (curated minimal collections), high-quality studio photography. Prioritize images with clean compositions and muted palettes.
+
+## Accessibility
+
+### Contrast & Readability
+- **Known strengths**: Large text sizes, clear hierarchy, high contrast (near-black #1A1A1A on white gives ~15:1 contrast ratio). Few elements means less cognitive load.
+- **Known risks**: Light/thin font weights (300) on body text can reduce readability, especially on lower-resolution displays or for users with visual impairments. **Ensure Light weight (300) is used only at 24px+ sizes.** Body text should be Regular (400) minimum.
+- **Secondary text contrast**: Medium gray (#888888) on white gives approximately 3.5:1 contrast — this **fails WCAG AA** for body text (requires 4.5:1). Darken secondary text to #767676 (exactly 4.5:1) or #666666 (5.7:1) for safety. On dark backgrounds, #A3A3A3 on #0A0A0A gives ~7:1 — safe.
+- **Remediation**: Slightly darkening grays does not break the minimalist aesthetic. The difference between #888888 and #666666 is barely perceptible but makes the design accessible.
+
+### Focus States
+Thin accent-colored outline, subtle and consistent with the minimal aesthetic. Avoid thick, high-contrast focus rings that clash with the design — but never remove them.
+
+```css
+/* Minimalist focus state */
+*:focus-visible {
+  outline: 1.5px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Tailwind */
+focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-[#2563EB]
+```
+
+### Motion Sensitivity
+Minimalism's animations are already so subtle they're nearly safe by default. For `prefers-reduced-motion`, disable fade-in-on-scroll animations and any entrance transitions. The core hover transitions (opacity changes) are subtle enough to keep.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+### Screen Reader Considerations
+Minimalism is naturally screen-reader friendly — few decorative elements, strong heading hierarchy, semantic content structure. Ensure decorative border dividers use `aria-hidden="true"`. Photography should have meaningful `alt` text (not "hero image" but a description of the content).
+
 ## Do's and Don'ts
 
 ### Do
-- Remove every element that doesn't serve a clear purpose
-- Use whitespace as an active design element, not passive emptiness
-- Choose ONE beautiful typeface and let it carry the design
-- Limit your palette to neutrals + ONE accent color
-- Make every remaining element perfect — with so few, each one is scrutinized
-- Let content be the star — photography, writing, product should shine
+- Remove every element that doesn't serve a clear purpose — if it can be removed without losing meaning, remove it. This is the fundamental act of minimalist design.
+- Use whitespace as an active design element, not passive emptiness — whitespace creates calm, hierarchy, and sophistication. It is not "wasted space."
+- Choose ONE beautiful typeface and let it carry the design — with decoration stripped away, the font IS the visual identity. Choose carefully.
+- Limit your palette to neutrals + ONE accent color — restraint creates focus. A single blue link on a monochrome page is more powerful than a rainbow of CTAs.
+- Make every remaining element perfect — with so few elements, each one is scrutinized. A misaligned margin or inconsistent spacing is immediately visible.
+- Let content be the star — photography, writing, product should shine. The design exists to frame the content, not compete with it.
+- Test at multiple viewport sizes — minimalism's generous spacing needs intentional compression for mobile, not just reflowing.
 
 ### Don't
-- Confuse minimalism with "not designed yet" — minimalism is hyper-intentional
-- Use more than one accent color
-- Add shadows, gradients, or decorative borders
-- Use bold font weights for headings (prefer Light to Medium)
-- Crowd elements together — generous spacing is non-negotiable
-- Add "just one more" thing — the discipline is the point
-- Use small font sizes — with so few elements, make the typography luxurious
+- Confuse minimalism with "not designed yet" — minimalism is hyper-intentional. Every pixel of whitespace, every font weight choice, every color decision is deliberate. Emptiness without intention is just unfinished.
+- Use more than one accent color — the moment you add a second color, you've broken the restraint that makes minimalism powerful. One accent. That's it.
+- Add shadows, gradients, or decorative borders — these add visual noise. Minimalism separates elements through whitespace and subtle hairline borders, not depth effects.
+- Use bold font weights for headings (prefer Light to Medium) — bold weights feel heavy and aggressive. Light weights at large sizes feel elegant and confident.
+- Crowd elements together — generous spacing is non-negotiable. If it doesn't feel "almost too much space," you haven't gone far enough.
+- Add "just one more" thing — the discipline is the point. Every addition should be questioned. The default answer is "no."
+- Use small font sizes — with so few elements, make the typography luxurious. Small text in minimalism reads as timid, not refined.
+- Ignore accessibility contrast requirements — minimalism's thin weights and gray secondary text are the most common accessibility pitfalls. Check your contrast ratios.
 
 ## Implementation Hints (Tailwind + CSS)
 
