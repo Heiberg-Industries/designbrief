@@ -339,6 +339,15 @@ async function main() {
     install(cwd, tools[i]);
   }
 
+  // Fire-and-forget telemetry (dynamic import: CJS → ESM)
+  import('../lib/telemetry.mjs')
+    .then(function (m) {
+      for (var j = 0; j < tools.length; j++) {
+        m.trackEvent('cli-install', { tool: tools[j].flag });
+      }
+    })
+    .catch(function () {});
+
   printSuccess();
 }
 

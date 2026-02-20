@@ -11,6 +11,7 @@ import { handleGetPalette } from '../lib/palette.mjs';
 import { handleCheckContrast } from '../lib/contrast.mjs';
 import { handleGetTokens } from '../lib/tokens.mjs';
 import { handleGetTailwindConfig } from '../lib/tailwind.mjs';
+import { trackEvent } from '../lib/telemetry.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(await readFile(join(__dirname, '..', 'package.json'), 'utf-8'));
@@ -19,6 +20,16 @@ const server = new McpServer({
   name: 'designbrief',
   version: pkg.version,
 });
+
+// ─── Telemetry ───────────────────────────────────────────────
+
+function withTelemetry(toolName, handler) {
+  return async (args, extra) => {
+    const result = await handler(args, extra);
+    trackEvent('mcp-tool-call', { tool: toolName, style: args.style || '' });
+    return result;
+  };
+}
 
 // ─── Tools ──────────────────────────────────────────────────
 
@@ -30,7 +41,7 @@ server.tool(
     mode: z.enum(['light', 'dark', 'both']).optional().default('both')
       .describe('Which mode palette to return'),
   },
-  handleGetPalette
+  withTelemetry('get-palette', handleGetPalette)
 );
 
 server.tool(
@@ -46,7 +57,7 @@ server.tool(
     fontWeight: z.number().optional().default(400)
       .describe('Font weight (bold >= 700 counts as large text at smaller sizes)'),
   },
-  handleCheckContrast
+  withTelemetry('check-contrast', handleCheckContrast)
 );
 
 server.tool(
@@ -57,7 +68,7 @@ server.tool(
     format: z.enum(['flat', 'nested']).optional().default('nested')
       .describe('"flat" returns CSS custom property pairs, "nested" groups by category'),
   },
-  handleGetTokens
+  withTelemetry('get-tokens', handleGetTokens)
 );
 
 server.tool(
@@ -68,7 +79,29 @@ server.tool(
     mode: z.enum(['light', 'dark', 'both']).optional().default('both')
       .describe('Generate config for light, dark, or both modes'),
   },
-  handleGetTailwindConfig
+  withTelemetry('get-tailwind-config', handleGetTailwindConfig)
+);
+
+server.tool(
+  'submit-feedback',
+  'Submit feedback, suggestions, or bug reports about designbrief styles or tools. Your message will be sent to the maintainer.',
+  {
+    message: z.string().min(3).max(2000)
+      .describe('Feedback message — what would you improve, what is missing, or what is broken?'),
+    style: z.string().optional()
+      .describe('Related style name, if applicable (e.g. "glassmorphism")'),
+    category: z.enum(['suggestion', 'bug', 'style-request', 'other']).optional().default('suggestion')
+      .describe('Type of feedback'),
+  },
+  async ({ message, style, category }) => {
+    trackEvent('feedback', { message, ...(style && { style }), category });
+    return {
+      content: [{
+        type: 'text',
+        text: 'Thank you! Your feedback has been recorded and will be reviewed by the designbrief maintainer.',
+      }],
+    };
+  }
 );
 
 // ─── Start ──────────────────────────────────────────────────
